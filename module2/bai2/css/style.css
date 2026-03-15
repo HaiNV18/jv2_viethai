@@ -1,0 +1,10 @@
+/* Code CSS */
+h1 {
+    color: red;
+}
+
+/*
+Bước 1: Tạo file css/style.css
+Bước 2: Tạo index.html
+Bước 3: <link rel="stylesheet" href="css/style.css">
+*/

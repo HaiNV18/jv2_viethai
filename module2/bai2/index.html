@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Đại học Khoa học Tự nhiên</title>
+
+    <!-- Cách 1: dùng liên kết đến file CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Cách 2: dùng thẻ style -->
+    <style>
+        body {background-color: #ccffff;}
+        p {text-align: center; font-size: 20pt !important;}
+
+        #post1 {color: blue;}
+        .colorRed {color: red;}
+
+        /* Tạo class .borderDouble */
+        .borderDouble {border: 10px double white;}
+    </style>
+</head>
+
+<body>
+    <h1>Ví dụ HTML CSS JavaScript cơ bản</h1>
+
+    <p style="text-transform: uppercase;">Đây là một đoạn văn bản sử dụng thẻ &lt;p&gt;.</p>
+
+    <!-- Gõ đoạn này -->
+    <div style="width: 45%;background-color:red; padding-bottom: 15px;">
+        <img src="img/logo.png" alt="logo" width="100px" />
+    </div>
+
+    <!-- Thêm class .borderDouble -->
+    <div class="borderDouble" style="width: 300px;background-color:blue; margin-top: 15px;">
+        <img src="img/logo.png" alt="logo" width="100px" />
+    </div>
+
+    margin: 15px 14px 13px 12px;
+    <!-- margin: "top" "right" "bottom" "left" -->
+
+    margin: 15px 5px;
+    <!-- margin: "top và bot" "left và right"; -->
+
+    margin: 15px;
+    <!-- margin: "top bottom left right"; -->
+
+
+    <table border="1" cellpadding="10" cellspacing="0">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Tên</th>
+                <th>Tuổi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>An</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Bình</td>
+                <td>22</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="container">
+        <img src="img/logo.png" alt="logo" width="100px" />
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi
+        lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget,
+        auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Mauris ante ligula, facilisis sed ornare eu,
+        lobortis in odio. Praesent convallis urna a lacus interdum ut hendrerit risus congue. Nunc sagittis dictum nisi,
+        sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis. Donec vitae dui
+        eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh tempor
+        porta. Cras ac leo purus. Mauris quis diam velit.
+    </div>
+
+    <script src="js/script.js"></script>
+
+    <button onclick="helloWorld('Hải')">Thực hiện event onclick</button>
+
+    <p id="demo"></p>
+    <div id="post"></div>
+    <button onclick="getPost()">Hiển thị bài viết</button>
+    <!-- Gõ JavaScript rồi load lại trang -->
+    <script>
+
+        document.getElementById("demo").innerHTML = "Dai hoc Khoa hoc Tu nhien";
+
+        function getPost() {
+            document.getElementById("post").innerHTML = `
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi
+        lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget,
+        auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Mauris ante ligula, facilisis sed ornare eu,
+        lobortis in odio. Praesent convallis urna a lacus interdum ut hendrerit risus congue. Nunc sagittis dictum nisi,
+        sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis. Donec vitae dui
+        eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh tempor
+        porta. Cras ac leo purus. Mauris quis diam velit.</p>
+            `;
+        }
+
+
+        function helloWorld(fullname) {
+            alert("Hello " + fullname);
+        }
+
+        function myFunction(a, b) {
+            return a * b;
+        }
+        var x = myFunction(6, 3);
+        console.log("x = " + x);
+
+
+
+
+        var cars = ["Honda", "Volvo", "BMW"];
+        // Câu hỏi phỏng vấn Gameloft, câu hỏi Codewars code giấy / code online:
+        // Code đảo ngược mảng cars
+        var reversedCars = [];
+        reversedCars = cars.reverse();
+        // for (let i = cars.length - 1; i >= 0; i--) {
+        //     reversedCars.push(cars[i]);
+        // }
+        console.log("reversedCars " + reversedCars);
+        console.log(cars[0])
+
+        var animalDog = {
+            name: "Dog",
+            color: "Black",
+            age: 5
+        };
+        // name, color và age là các thuộc tính (field)
+
+
+
+
+        let age = 33; // Biến
+        const company = "Đại học Khoa học Tự nhiên"; // Hằng
+        const PI = 3.14; // Hằng
+
+
+        var cong = 1 + 2 + 'a' + 3 + 4 + 'bcd';
+        // alert(cong);
+        // Dấu cộng:
+        // Nếu 2 số thì sẽ thực hiện phép cộng
+        // Nếu 1 trong 2 là chuỗi thì sẽ thực hiện phép nối chuỗi
+
+
+        var a = 10;
+        var b = '10';
+        console.log(a == b); // So sánh giá trị: true
+        console.log(a === b); // So sánh giá trị và kiểu dữ liệu: false
+        // Data type - kiểu dữ liệu:
+        // number, string, boolean, null, undefined, object, array
+
+
+
+
+
+
+        // Scope: phạm vi hoạt động của biến
+        var total = 0;
+        for (let i = 0; i < 5; i++) {
+            total = total + i;
+        }
+        // console.log("i " + i);
+
+        company = "Đại học Bách Khoa"; // Lỗi: không thể gán lại giá trị cho hằng
+        console.log("company " + company);
+
+    </script>
+</body>
+
+</html>
