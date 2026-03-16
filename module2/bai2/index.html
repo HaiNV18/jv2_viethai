@@ -17,6 +17,14 @@
 
         /* Tạo class .borderDouble */
         .borderDouble {border: 10px double white;}
+
+		.quote::before {
+		  content: "'";
+		}
+
+		.quote::after {
+		  content: "'";
+		}
     </style>
 </head>
 
@@ -43,6 +51,16 @@
 
     margin: 15px;
     <!-- margin: "top bottom left right"; -->
+
+    id được ưu tiên hơn class
+    class được ưu tiên hơn thẻ
+
+
+
+    Important: nếu CSS có !important thì sẽ được ưu tiên áp dụng hơn các CSS khác không có !important
+
+
+
 
 
     <table border="1" cellpadding="10" cellspacing="0">
@@ -80,13 +98,17 @@
 
     <script src="js/script.js"></script>
 
-    <button onclick="helloWorld('Hải')">Thực hiện event onclick</button>
+    <button onclick="helloWorld('Văn')">Thực hiện event onclick</button>
 
     <p id="demo"></p>
     <div id="post"></div>
     <button onclick="getPost()">Hiển thị bài viết</button>
     <!-- Gõ JavaScript rồi load lại trang -->
     <script>
+		// const monthInYear = 12;
+		// monthInYear = 13;
+		// console.log(monthInYear);
+
 
         document.getElementById("demo").innerHTML = "Dai hoc Khoa hoc Tu nhien";
 
@@ -166,7 +188,7 @@
         for (let i = 0; i < 5; i++) {
             total = total + i;
         }
-        // console.log("i " + i);
+        console.log("i " + i);
 
         company = "Đại học Bách Khoa"; // Lỗi: không thể gán lại giá trị cho hằng
         console.log("company " + company);
