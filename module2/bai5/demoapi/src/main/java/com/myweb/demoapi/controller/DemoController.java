@@ -68,7 +68,21 @@ public class DemoController {
     public ResponseEntity deleteProduct(
             @RequestParam Integer id
     ) {
-        System.out.println("Xóa sản phẩm có id là: " + id);
+        List<String> listProducts = new ArrayList<>();
+        listProducts.add("Samsung"); // index=0 id=1
+        listProducts.add("OPPO"); // index=1 id=2
+        listProducts.add("iPhone"); // index=2 id=3
+        listProducts.add("Huawei"); // index=3 id=4
+
+        if (id <= listProducts.size()) {
+            String getProduct = listProducts.get(id - 1);
+            listProducts.remove(id - 1);
+            System.out.println("Xóa sản phẩm có id là: " + id);
+            System.out.println("Tên sản phẩm: " + getProduct);
+            return new ResponseEntity<>(listProducts, HttpStatus.OK);
+        }
+
+        System.out.println("Không tìm thấy sản phẩm");
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
