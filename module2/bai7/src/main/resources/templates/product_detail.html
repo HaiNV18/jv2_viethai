@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+</head>
+<body>
+
+    <div th:each="product : ${listProduct}">
+        <img th:src="${productImage}" alt="Product Image">
+        <h2>Name: <span th:text="${product.name}"></span></h2>
+        <p th:text="${product.description}"></p>
+
+        <p th:if="${product.price > 0}" th:text="${product.price}"></p>
+
+        <p th:unless="${product.price > 0}">
+            0
+        </p>
+
+        <button>Add to Cart</button>
+    </div>
+
+
+
+
+
+
+    <hr>
+
+    <h3>Upload product image</h3>
+
+    <form action="http://localhost:8080/demo/product_detail"
+          method="POST"
+          enctype="multipart/form-data">
+        <input type="file" id="file" name="file" />
+        <input type="submit" value="Upload file" />
+    </form>
+</body>
+</html>

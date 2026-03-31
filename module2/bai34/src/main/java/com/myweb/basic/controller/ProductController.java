@@ -17,7 +17,7 @@ public class ProductController {
         int a = 3;
         int b = 4;
 
-        model.addAttribute("a", a);
+            model.addAttribute("a", a);
         model.addAttribute("b", b);
         model.addAttribute("sum", a + b);
         model.addAttribute("sub", a - b);
