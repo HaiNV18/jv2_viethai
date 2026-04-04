@@ -1,48 +1,42 @@
 package com.myweb.demoapi.controller;
 
 import com.myweb.demoapi.dto.Product;
+import com.myweb.demoapi.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
 
 @RestController
+@RequestMapping("/api/demo")
 public class DemoController {
 
-    // http://localhost:8080/products?id=4
+    @Autowired
+    public ProductService productSer;
+
+    // http://localhost:8080/api/demo/products
     @GetMapping("/products") // GetMapping là phương thức get
-    public ResponseEntity<List<String>> getAllProducts(@RequestParam Integer id){
-//        @RequestParam yêu cầu bắt buộc phải có tham số
+    public ResponseEntity<List<String>> getAllProducts(){
         List<String> listProducts = new ArrayList<>();
-        listProducts.add("Samsung"); // index=0
-        listProducts.add("OPPO"); // index=1
-        listProducts.add("iPhone"); // index=2
-        listProducts.add("Huawei"); // index=3
-
-        if (id <= listProducts.size()) {
-            String getProduct = listProducts.get(id - 1);
-            List<String> products = new ArrayList<>();
-            products.add(getProduct);
-            return new ResponseEntity<>(products, HttpStatus.OK);
-        }
-
+        listProducts.add("Samsung");
+        listProducts.add("iPhone");
+        listProducts.add("OPPO");
+        listProducts.add("Huawei");
         return new ResponseEntity<>(listProducts, HttpStatus.OK);
     }
 
-    // http://localhost:8080/product/detail
+    // http://localhost:8080/api/demo/product/detail
     @PostMapping("/product/detail")
-    public ResponseEntity getProductDetail(
-            @RequestParam String name,
-            @RequestParam Integer price,
-            @RequestParam String color
-    ) {
-        System.out.println("Tên sản phẩm: " + name);
-        System.out.println("Giá : " + price);
-        System.out.println("Màu sắc: " + color);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity getProductDetail(@RequestParam Integer id) {
+//        @RequestParam yêu cầu bắt buộc phải có tham số
+        List<Product> listProducts = productSer.getListProduct();
+        Product product = productSer.getProductById(listProducts, id);
+        return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
     @PostMapping("/product/detail/body")
@@ -85,4 +79,18 @@ public class DemoController {
         System.out.println("Không tìm thấy sản phẩm");
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/test-header")
+    public ResponseEntity getHeader(@RequestHeader Map<String, String> header) {
+        System.out.println(header);
+        System.out.println(header.get("Host"));
+        System.out.println(header.get("ip"));
+
+        // Split array, substring, concat để kiểm tra ip
+        if (header.get("ip").equals("127.0.1.1")) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>(header, HttpStatus.OK);
+    }
+
 }
