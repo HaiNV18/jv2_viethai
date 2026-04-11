@@ -73,4 +73,34 @@ public class ProductService {
         System.out.println(response.getBody());
         return response.getBody();
     }
+
+    public String updateProduct(Integer id,
+                                String title,
+                                String description,
+                                String price,
+                                String category) {
+
+        String url = "https://dummyjson.com/products/" + id;
+
+        Map<String, Object> requestBody = new HashMap<>();
+        requestBody.put("title", title);
+        requestBody.put("description", description);
+        requestBody.put("price", Integer.parseInt(price));
+        requestBody.put("category", category);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<Map<String, Object>> entity =
+                new HttpEntity<>(requestBody, headers);
+
+        ResponseEntity<String> response = restTemplate.exchange(
+                url,
+                HttpMethod.PUT,
+                entity,
+                String.class
+        );
+        System.out.println(response.getBody());
+        return response.getBody();
+    }
 }

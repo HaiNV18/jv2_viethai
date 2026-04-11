@@ -16,6 +16,7 @@ import org.thymeleaf.context.WebContext;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import tools.jackson.databind.JsonNode;
 
+import java.awt.print.Pageable;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,8 +51,8 @@ public class FruitablesController {
             @RequestParam(defaultValue = "1") int page,
             Model model
     ) throws IOException, InterruptedException {
-        int limit = 8;
-        int skip = (page - 1) * limit;
+        int limit = 12; // limit items in per page
+        int skip = (page - 1) * limit; // skip item 0-8
 
         String url = "https://dummyjson.com/products/category/" + cat + "?limit=" + limit + "&skip=" + skip;
         if (cat.equals("all")) {
@@ -62,6 +63,7 @@ public class FruitablesController {
 
         List<ProductDto> listProduct = productService.getlistProductByJsonNode(data);
 
+        // Calculate pages
         int total = data.get("total").asInt();
         int totalPages = (int) Math.ceil((double) total / limit); // Lam tron
 
@@ -72,16 +74,13 @@ public class FruitablesController {
         return "fruitables/shop";
     }
 
-    @GetMapping(value = "/product-detail/{id}", produces = MediaType.TEXT_HTML_VALUE)
-    @ResponseBody
-    public String showDetail(@PathVariable Integer id) throws IOException, InterruptedException {
+    @GetMapping(value = "/product-detail/{id}")
+    public String showDetail(@PathVariable Integer id, Model model) throws IOException, InterruptedException {
         String url = "https://dummyjson.com/products/" + id;
         JsonNode data = externalApiService.fetchDataFromExternalApi(url);
         ProductDto product = productService.getProductByJsonNode(data);
-
-        Context context = new Context();
-        context.setVariable("product", product);
-        return templateEngine.process("fruitables/shop-detail", context);
+        model.addAttribute("product", product);
+        return "fruitables/shop-detail";
     }
 
     @GetMapping("/product-search")
