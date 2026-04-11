@@ -84,6 +84,33 @@ public class FruitablesController {
         return templateEngine.process("fruitables/shop-detail", context);
     }
 
+    @GetMapping("/product-search")
+    public String searchProduct(
+            @RequestParam("k") String keyword,
+            @RequestParam(defaultValue = "1") int page,
+            Model model
+    ) throws IOException, InterruptedException {
+
+        int limit = 8;
+        int skip = (page - 1) * limit;
+
+        String url = "https://dummyjson.com/products/search?q="
+                + keyword + "&limit=" + limit + "&skip=" + skip;
+
+        JsonNode data = externalApiService.fetchDataFromExternalApi(url);
+
+        List<ProductDto> listProduct = productService.getlistProductByJsonNode(data);
+
+        int total = data.get("total").asInt();
+        int totalPages = (int) Math.ceil((double) total / limit);
+
+        model.addAttribute("listProduct", listProduct);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("keyword", keyword);
+
+        return "fruitables/shop";
+    }
     @GetMapping(value = "/contact", produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
     public String showContactpage() {
