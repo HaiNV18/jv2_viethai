@@ -136,12 +136,14 @@
 
                                 <div class="form-group">
                                     <label for="categoryProduct">Category</label>
-                                    <select id="categoryProduct" class="form-select" aria-label="Default select example">
+                                    <select id="categoryProduct" name="category" class="form-select" aria-label="Default select example">
                                         <option th:each="cat : ${listCat}" th:value="${cat.name}" th:text="${cat.name}"></option>
                                     </select>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
                             </form>
 
                         </div>

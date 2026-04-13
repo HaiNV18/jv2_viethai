@@ -43,7 +43,7 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">Tables</h1>
+                    <h1 class="mt-4">List Product</h1>
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                         <li class="breadcrumb-item active">List Product</li>
@@ -68,8 +68,8 @@
                                         <th>Category</th>
                                         <th>Office</th>
                                         <th>Age</th>
-                                        <th>Start date</th>
                                         <th>Price</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -78,8 +78,8 @@
                                         <th>Category</th>
                                         <th>Office</th>
                                         <th>Age</th>
-                                        <th>Start date</th>
                                         <th>Price</th>
+                                        <th></th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -88,8 +88,12 @@
                                         <td>System Architect</td>
                                         <td>Edinburgh</td>
                                         <td>61</td>
-                                        <td>2011/04/25</td>
                                         <td th:text="${product.price}"></td>
+                                        <td>
+                                            <a class="btn btn-warning" th:href="@{/admin/update-product/{id}(id=${product.id})}">
+                                                <i class="bi bi-pencil-square"></i> Update
+                                            </a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
