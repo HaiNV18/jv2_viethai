@@ -7,6 +7,8 @@
 
 <form action="/search" method="GET">
 
+    <input type="hidden" name="id" placeholder="id" th:value="${movie.id}"/>
+
     <input type="text" name="title" placeholder="title" th:value="${movie.title}"/>
 
     <input type="number" name="year" placeholder="year" th:value="${movie.year}"/>
@@ -17,7 +19,7 @@
 
     <input type="text" name="rating" placeholder="rating" th:value="${movie.rating}"/>
 
-    <input type="submit" name="submit" value="Search"/>
+    <input type="submit" name="submit" value="Save"/>
 </form>
 </body>
 

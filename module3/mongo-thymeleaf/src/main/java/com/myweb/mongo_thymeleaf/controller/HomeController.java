@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
@@ -27,6 +28,13 @@ public class HomeController {
 
     @GetMapping("/insert-movie")
     public String showInsertPage(Model model) {
+        return "insert-movie";
+    }
+
+    // http://localhost:8080/api/v1/movie
+    @PostMapping("/insert")
+    public String insertMovie(Model model) {
+        Movie movie = new Movie();
         return "insert-movie";
     }
 
@@ -53,4 +61,19 @@ public class HomeController {
         model.addAttribute("listMovie", listMovie);
         return "list-movie";
     }
+
+    @GetMapping("/insert-update-movie")
+    public String showInsertUpdatePage(
+            Model model,
+            @RequestParam("id") String id
+    ) {
+        Movie movie = movieService.findById(id);
+        model.addAttribute("movie", movie);
+        model.addAttribute("error-message", "Found");
+        if (movie == null) {
+            model.addAttribute("error-message", "Movie Not Found");
+        }
+        return "insert-update-movie";
+    }
+
 }
