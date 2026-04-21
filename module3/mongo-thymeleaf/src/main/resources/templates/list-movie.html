@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Web xem phim</title>
+</head>
+<body>
+
+<form action="http://localhost:8080/search" method="GET">
+
+    <input type="text" name="title" placeholder="title"/>
+
+    <input type="submit" name="submit" value="Search"/>
+</form>
+
+<table>
+    <tr>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Genre</td>
+        <td>Director</td>
+        <td>Year</td>
+        <td>Rating</td>
+    </tr>
+    <tr th:each="movie : ${listMovie}">
+        <td th:text="${movie.id}"></td>
+        <td th:text="${movie.title}"></td>
+        <td th:text="${movie.genre}"></td>
+        <td th:text="${movie.director}"></td>
+        <td th:text="${movie.year}"></td>
+        <td th:text="${movie.rating}"></td>
+    </tr>
+
+</table>
+
+</body>
+
+</html>
