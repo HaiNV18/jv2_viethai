@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Tables</title>
+</head>
+<body>
+    <form action="/file/upload" method="post" enctype="multipart/form-data">
+        <label for="file">Choose JSON file (array of restaurant objects):</label><br/>
+        <input id="file" name="file" type="file" accept=".json" required /><br/><br/>
+        <button type="submit">Upload</button>
+    </form>
+
+    <div th:if="${message}">
+        <h3>Status</h3>
+        <p th:text="${message}"></p>
+        <p th:if="${importCount != null}">Imported Count: <span th:text="${importCount}"></span></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Tables</title>
+</head>
+<body>
+
+<form th:action="@{/restaurants/update/{id}(id=${restaurant.restaurantId})}" th:object="${restaurant}" method="post">
+    <table border="1" cellpadding="10">
+        <tr>
+            <td>Name:</td>
+            <td><input type="text" th:field="*{name}" style="width: 400px;" /><br/></td>
+        </tr>
+        <tr>
+            <td>Borough:</td>
+            <td><input type="text" th:field="*{borough}" /></td>
+        </tr>
+        <tr>
+            <td>Cuisine:</td>
+            <td><input type="text" th:field="*{cuisine}" /></td>
+        </tr>
+    </table>
+    <button type="submit">Update</button>
+    <div th:text="${message}"></div>
+</form>
+
+</body>
+</html>
