@@ -5,6 +5,11 @@ import com.myweb.restaurant.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.LookupOperation;
+import org.springframework.data.mongodb.core.aggregation.MatchOperation;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import tools.jackson.databind.ObjectMapper;
@@ -13,6 +18,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,6 +27,9 @@ public class RestaurantService {
 
     @Autowired
     public RestaurantRepository restaurantRepo;
+
+    @Autowired
+    private MongoTemplate mongoTemplate;	//class dùng để truy vấn liên kết
 
     public String handleUpload(MultipartFile file) throws IOException {
         if (file == null || file.isEmpty()) {
@@ -77,6 +86,18 @@ public class RestaurantService {
             oldObject.setCuisine(newObject.getCuisine());
         }
         return restaurantRepo.save(oldObject);
+    }
+
+    public List<HashMap> getRestaurantWithItems(String restaurantId){
+        MatchOperation matchStage = Aggregation.match(Criteria.where("restaurant_id").is(restaurantId));
+        LookupOperation lookupStage = LookupOperation.newLookup()
+                .from("items")                 //tên của collection phụ
+                .localField("restaurant_id")   //tên field của collection chính
+                .foreignField("restaurant_id") //tên field của collection phụ
+                .as("menuItems");              //tên field chứa giá trị liên kết của collection phụ
+
+        Aggregation aggregation = Aggregation.newAggregation(matchStage, lookupStage);
+        return mongoTemplate.aggregate(aggregation, "restaurants", HashMap.class).getMappedResults();
     }
 
 }

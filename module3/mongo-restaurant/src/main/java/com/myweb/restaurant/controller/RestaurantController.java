@@ -24,7 +24,7 @@ public class RestaurantController {
     }
 
     @GetMapping(value = "/list", produces = MediaType.TEXT_HTML_VALUE)
-    public String showUploadPage(@RequestParam(defaultValue = "0") int page, Model model) {//mặc định là trang đầu tiên
+    public String showListPage(@RequestParam(defaultValue = "0") int page, Model model) {//mặc định là trang đầu tiên
         int pageSize = 10;	//mỗi trang hiển thị tối đa 10 dữ liệu
         Page<Restaurant> restaurantPage =
                 restaurantService.findAllPagination(
