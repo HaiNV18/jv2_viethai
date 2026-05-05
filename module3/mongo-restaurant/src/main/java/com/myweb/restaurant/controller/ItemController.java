@@ -10,9 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/item")
@@ -44,4 +42,29 @@ public class ItemController {
         return "admin/list-items";
     }
 
+    @GetMapping("/detail/{itemId}")
+    public String showItemDetail(@PathVariable String itemId, Model model) {
+        Item item = itemService.findByItemId(itemId);
+        model.addAttribute("item", item);
+        return "admin/update-item";
+    }
+
+    @PostMapping("/update/{itemId}")
+    public String updateItem(@PathVariable("itemId") String itemId,
+                                   @ModelAttribute("item") Item item) {
+        Item oldObject = itemService.findByItemId(itemId);
+        itemService.updateItem(oldObject, item);
+        return "redirect:/item/list";
+    }
+
+    @GetMapping("/insert")
+    public String insertItemView(Model model) {
+        return "admin/insert-item";
+    }
+
+    @PostMapping("/insert")
+    public String insertItem(@ModelAttribute("item") Item newItem) {
+        itemService.save(newItem);
+        return "redirect:/item/list";
+    }
 }

@@ -1,15 +1,25 @@
 package com.myweb.restaurant.controller;
 
 import com.myweb.restaurant.model.Restaurant;
+import com.myweb.restaurant.service.ItemRepositoryImpl;
 import com.myweb.restaurant.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.LookupOperation;
+import org.springframework.data.mongodb.core.aggregation.MatchOperation;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.List;
 
 @Controller
 @RequestMapping("/restaurant")
@@ -58,7 +68,21 @@ public class RestaurantController {
                                    @ModelAttribute("restaurant") Restaurant restaurant) {
         Restaurant oldObject = restaurantService.findById(restaurantId);
         restaurantService.updateRestaurant(oldObject, restaurant);
-        return "redirect:/restaurants";
+        return "redirect:/restaurant/list";
     }
+
+    @PutMapping("/api/restaurants/change-id")
+    public ResponseEntity<String> updateRestaurantId(
+            @RequestParam String oldId,
+            @RequestParam String newId) {
+        try {
+            restaurantService.updateRestaurantIdWithSave(oldId, newId);
+            return ResponseEntity.ok("Restaurant ID updated in both collections");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error: " + e.getMessage());
+        }
+    }
+
+
 
 }

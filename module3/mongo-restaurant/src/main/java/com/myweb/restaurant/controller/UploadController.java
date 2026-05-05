@@ -32,4 +32,9 @@ public class UploadController {
         return new ResponseEntity<List<HashMap>>(info, HttpStatus.OK);
     }
 
+    @GetMapping("/api/items/{id}/with-restaurants")
+    public ResponseEntity<List<HashMap>> getItemWithRestaurant(@PathVariable("id") String restaurantId) {
+        List<HashMap> info = restaurantService.getItemsWithRestaurantInfo(restaurantId);
+        return new ResponseEntity<List<HashMap>>(info, HttpStatus.OK);
+    }
 }

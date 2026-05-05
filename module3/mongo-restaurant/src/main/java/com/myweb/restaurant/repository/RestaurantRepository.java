@@ -8,5 +8,6 @@ import java.util.Optional;
 
 public interface RestaurantRepository extends MongoRepository<Restaurant, String> {
     Optional<Restaurant> findByRestaurantId(String borough);
+    Restaurant findFirstByRestaurantId(String restaurantId);
     List<Restaurant> findByBorough(String borough);
 }

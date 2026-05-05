@@ -1,16 +1,20 @@
 package com.myweb.restaurant.service;
 
+import com.myweb.restaurant.model.Item;
 import com.myweb.restaurant.model.Restaurant;
+import com.myweb.restaurant.repository.ItemRepository;
 import com.myweb.restaurant.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.aggregation.LookupOperation;
 import org.springframework.data.mongodb.core.aggregation.MatchOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import tools.jackson.databind.ObjectMapper;
 
@@ -27,6 +31,12 @@ public class RestaurantService {
 
     @Autowired
     public RestaurantRepository restaurantRepo;
+
+    @Autowired
+    private ItemRepository itemRepository;
+
+    @Autowired
+    public ItemRepositoryImpl itemRepositoryImpl;
 
     @Autowired
     private MongoTemplate mongoTemplate;	//class dùng để truy vấn liên kết
@@ -100,4 +110,37 @@ public class RestaurantService {
         return mongoTemplate.aggregate(aggregation, "restaurants", HashMap.class).getMappedResults();
     }
 
+    public List<HashMap> getItemsWithRestaurantInfo(String restaurantId) {
+        MatchOperation matchOperation = Aggregation.match(Criteria.where("restaurant_id").is(restaurantId));
+        LookupOperation lookupOperation = LookupOperation.newLookup()
+                .from("restaurants")
+                .localField("restaurant_id")
+                .foreignField("restaurant_id")
+                .as("restaurantInfo");
+        Aggregation aggregation = Aggregation.newAggregation(
+                matchOperation,
+                lookupOperation
+        );
+        AggregationResults<HashMap> results = mongoTemplate.aggregate(aggregation, "items", HashMap.class);
+        return results.getMappedResults();
+    }
+
+    @Transactional
+    public void updateRestaurantIdWithSave(String oldId, String newId) {
+        // Step 1
+        Restaurant restaurant = restaurantRepo.findFirstByRestaurantId(oldId);
+        if (restaurant == null)
+            throw new RuntimeException("Restaurant not found with restaurant_id: " + oldId);
+        restaurant.setRestaurantId(newId);
+        restaurantRepo.save(restaurant);	//lưu thông tin ID mới vào collection restaurant
+
+        // Step 2
+        itemRepositoryImpl.updateRestaurantId(oldId, newId); // update 1 lan
+
+//        List<Item> items = itemRepository.findByRestaurantId(oldId);
+//        for (Item item : items) {
+//            item.setRestaurantId(newId); // update nhieu lan
+//            itemRepository.save(item);	//lưu mỗi item vào collection
+//        }
+    }
 }
