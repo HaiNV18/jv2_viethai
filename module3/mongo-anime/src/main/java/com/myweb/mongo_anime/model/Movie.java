@@ -19,6 +19,8 @@ public class Movie {
     private String releaseDate;
     @Field("Popularity")
     private Double popularity;
+    @Field("original_language")
+    private String original_language;
 }
 
 // Slide bai 3

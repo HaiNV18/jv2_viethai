@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bar Chart Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div style="width: 600px; height: 400px;">
+        <canvas id="barChart"></canvas>
+    </div>
+
+    <script th:inline="javascript">
+        const languages = [[${languageCounts.keySet()}]];
+        const counts = [[${languageCounts.values()}]];
+        const ctx = document.getElementById('barChart').getContext('2d');
+
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: languages,
+            datasets: [{
+              label: 'Number of Movies',
+              data: counts,
+              backgroundColor: 'blue'
+            }]
+          }
+        });
+    </script>
+</body>
+</html>

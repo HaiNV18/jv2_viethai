@@ -1,6 +1,5 @@
 package com.myweb.mongo_anime.controller;
 
-import com.myweb.mongo_anime.model.Comment;
 import com.myweb.mongo_anime.model.Movie;
 import com.myweb.mongo_anime.service.CommentService;
 import com.myweb.mongo_anime.service.MovieService;
@@ -11,18 +10,12 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/movies")
-public class MovieController {
+@RequestMapping("/admin")
+public class MovieAdminController {
 
     @Autowired
     public MovieService movieService;
@@ -30,7 +23,7 @@ public class MovieController {
     @Autowired
     public CommentService commentService;
 
-    @GetMapping(value = "/home", produces = MediaType.TEXT_HTML_VALUE)
+    @GetMapping(value = "/movie/list", produces = MediaType.TEXT_HTML_VALUE)
     public String showMovieList(@RequestParam(defaultValue = "0") int page, Model model) {
         int pageSize = 3;	//số lượng movie hiển thị trong 1 trang
         Page<Movie> moviePage = movieService.findAllPagination(PageRequest.of(page, pageSize));
@@ -47,37 +40,7 @@ public class MovieController {
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
-        return "anime-main/categories";	//đường dẫn tới file HTML trong templates
+        return "admin/list-movie";	//đường dẫn tới file HTML trong templates
     }
-
-    @GetMapping(value = "/detail", produces = MediaType.TEXT_HTML_VALUE)
-    public String showDetail(Model model) {
-        return "anime-main/blog-details";
-    }
-
-    @PostMapping("/detail/insert-comment")
-    public String createNewComment(Comment inputComment, RedirectAttributes redirectAttributes) {
-        commentService.createNewComment(inputComment);
-        redirectAttributes.addFlashAttribute("message", "Comment is saved");
-        return "anime-main/blog-details";
-    }
-
-    @GetMapping("/chart")
-    public String showChart(Model model) {
-        Map<String, Long> languageCounts = movieService.getAndGroupMoviesByLanguage();
-        Map<String, Long> filtered = languageCounts.entrySet().stream()
-                // .filter(e -> e.getValue() > 50)	//lọc những nhóm nào có số lượng movie lớn hơn 50
-                .sorted(Map.Entry.<String, Long>comparingByValue()) //sắp xếp dữ liệu
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        Map.Entry::getValue,
-                        (e1, e2) -> e1,
-                        LinkedHashMap::new
-                ));
-
-        model.addAttribute("languageCounts", filtered);	//truyền dữ liệu qua trang web
-        return "movie_bar_chart";	//mở trang HTML
-    }
-
 
 }
