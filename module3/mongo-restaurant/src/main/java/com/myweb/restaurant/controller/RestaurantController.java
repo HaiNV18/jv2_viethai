@@ -1,25 +1,16 @@
 package com.myweb.restaurant.controller;
 
 import com.myweb.restaurant.model.Restaurant;
-import com.myweb.restaurant.service.ItemRepositoryImpl;
 import com.myweb.restaurant.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.LookupOperation;
-import org.springframework.data.mongodb.core.aggregation.MatchOperation;
-import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.List;
 
 @Controller
 @RequestMapping("/restaurant")
@@ -34,12 +25,25 @@ public class RestaurantController {
     }
 
     @GetMapping(value = "/list", produces = MediaType.TEXT_HTML_VALUE)
-    public String showListPage(@RequestParam(defaultValue = "0") int page, Model model) {//mặc định là trang đầu tiên
+    public String showListPage(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(required = false) String keyword, // không bắt buộc có keyword
+            Model model
+    ) {//mặc định là trang đầu tiên
         int pageSize = 10;	//mỗi trang hiển thị tối đa 10 dữ liệu
-        Page<Restaurant> restaurantPage =
-                restaurantService.findAllPagination(
-                        PageRequest.of(page, pageSize, Sort.by("name").ascending())
-                );
+        Page<Restaurant> restaurantPage;
+
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            restaurantPage = restaurantService.searchByName(
+                    keyword,
+                    PageRequest.of(page, pageSize)
+            );
+        } else {
+            restaurantPage = restaurantService.findAllPagination(
+                    PageRequest.of(page, pageSize)
+            );
+        }
+
         int totalPages = restaurantPage.getTotalPages();
         int currentPage = page;
         int maxPagesToShow = 5;	//hiển thị tối đa 5 chỉ số trang
