@@ -89,6 +89,22 @@ public class RestaurantService {
         return restaurantRepo.findByNameContainingIgnoreCase(keyword, pageable);
     }
 
+    public Page<Restaurant> searchRestaurant(
+            String keyword,
+            String borough,
+            Pageable pageable
+    ) {
+
+        if (keyword == null) keyword = "";
+        if (borough == null) borough = "";
+
+        return restaurantRepo.searchRestaurant(
+                keyword,
+                borough,
+                pageable
+        );
+    }
+
     public Restaurant updateRestaurant(Restaurant oldObject, Restaurant newObject){
         if (Objects.nonNull(newObject.getName())){
             oldObject.setName(newObject.getName());

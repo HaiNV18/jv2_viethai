@@ -5,7 +5,6 @@ import com.myweb.restaurant.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -28,21 +27,17 @@ public class RestaurantController {
     public String showListPage(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(required = false) String keyword, // không bắt buộc có keyword
+            @RequestParam(required = false) String borough,
             Model model
     ) {//mặc định là trang đầu tiên
         int pageSize = 10;	//mỗi trang hiển thị tối đa 10 dữ liệu
-        Page<Restaurant> restaurantPage;
-
-        if (keyword != null && !keyword.trim().isEmpty()) {
-            restaurantPage = restaurantService.searchByName(
-                    keyword,
-                    PageRequest.of(page, pageSize)
-            );
-        } else {
-            restaurantPage = restaurantService.findAllPagination(
-                    PageRequest.of(page, pageSize)
-            );
-        }
+        
+        Page<Restaurant> restaurantPage =
+                restaurantService.searchRestaurant(
+                        keyword,
+                        borough,
+                        PageRequest.of(page, pageSize)
+                );
 
         int totalPages = restaurantPage.getTotalPages();
         int currentPage = page;
