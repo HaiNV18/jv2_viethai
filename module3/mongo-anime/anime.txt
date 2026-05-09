@@ -1,0 +1,42 @@
+db.movies.insertMany([
+  {
+    "Title": "Inception",
+    "Year": "2010",
+    "Director": "Christopher Nolan",
+    "Overview": "A skilled thief enters people's dreams to steal secrets but is given a chance to erase his criminal history by planting an idea into a target's mind.",
+    "Release_Date": "2010-07-16",
+    "Popularity": 92.5
+  },
+  {
+    "Title": "Interstellar",
+    "Year": "2014",
+    "Director": "Christopher Nolan",
+    "Overview": "A team of astronauts travels through a wormhole in search of a new habitable planet as Earth faces environmental collapse.",
+    "Release_Date": "2014-11-07",
+    "Popularity": 95.2
+  },
+  {
+    "Title": "The Dark Knight",
+    "Year": "2008",
+    "Director": "Christopher Nolan",
+    "Overview": "Batman faces the Joker, a criminal mastermind who seeks to plunge Gotham City into chaos.",
+    "Release_Date": "2008-07-18",
+    "Popularity": 98.1
+  },
+  {
+    "Title": "Parasite",
+    "Year": "2019",
+    "Director": "Bong Joon-ho",
+    "Overview": "A poor family schemes to become employed by a wealthy household, leading to unexpected consequences.",
+    "Release_Date": "2019-05-30",
+    "Popularity": 89.7
+  },
+  {
+    "Title": "Avengers: Endgame",
+    "Year": "2019",
+    "Director": "Anthony Russo, Joe Russo",
+    "Overview": "The Avengers assemble once more to reverse Thanos' actions and restore balance to the universe.",
+    "Release_Date": "2019-04-26",
+    "Popularity": 97.3
+  }
+]);
