@@ -23,11 +23,13 @@ public interface RestaurantRepository extends MongoRepository<Restaurant, String
         {
            'name': { $regex: ?0, $options: 'i' },
            'borough': { $regex: ?1, $options: 'i' }
+           'cuisine': { $regex: ?2, $options: 'i' }
         }
 """)
     Page<Restaurant> searchRestaurant(
             String keyword,
             String borough,
+            String cuisine,
             Pageable pageable
     );
 }

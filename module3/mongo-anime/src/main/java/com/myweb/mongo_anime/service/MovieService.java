@@ -21,6 +21,12 @@ public class MovieService {
         return movieRepo.findAll(pageable);
     }
 
+    public Integer countMovies() {
+        List<Movie> movies = movieRepo.findAll();
+        Integer count = (int) movies.stream().count();
+        return count;
+    }
+
     public Map<String, Long> getAndGroupMoviesByLanguage() {
         List<Movie> movies = movieRepo.findAll();	//lấy tất cả dữ liệu
 

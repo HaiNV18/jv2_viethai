@@ -13,21 +13,20 @@ public class Movie {
     private String year;
     @Field("Director")
     private String director;
+    @Field("Thumbnail")
+    private String thumbnail;
     @Field("Overview")
     private String overview;
     @Field("Release_Date")
     private String releaseDate;
-    @Field("Popularity")
-    private Double popularity;
-    @Field("original_language")
-    private String original_language;
-}
+    @Field("Comment")
+    private Integer comment;
+    @Field("VoteCount")
+    private Integer vote_count;
+    @Field("VoteAverage")
+    private Integer vote_average;
 
-// Slide bai 3
-//db.movies.insertOne({
-//    title: "Inception",
-//            year: 2010,
-//            genre: ["Action", "Sci-Fi", "Thriller"],
-//    director: "Christopher Nolan",
-//            rating: 8.8
-//});
+    public boolean isHighlyRated() {
+        return this.vote_average >= 8.0;
+    }
+}

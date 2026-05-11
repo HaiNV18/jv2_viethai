@@ -28,14 +28,16 @@ public class RestaurantController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(required = false) String keyword, // không bắt buộc có keyword
             @RequestParam(required = false) String borough,
+            @RequestParam(required = false) String cuisine,
             Model model
     ) {//mặc định là trang đầu tiên
         int pageSize = 10;	//mỗi trang hiển thị tối đa 10 dữ liệu
-        
+
         Page<Restaurant> restaurantPage =
                 restaurantService.searchRestaurant(
                         keyword,
                         borough,
+                        cuisine,
                         PageRequest.of(page, pageSize)
                 );
 

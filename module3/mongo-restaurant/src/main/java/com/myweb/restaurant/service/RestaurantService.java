@@ -92,15 +92,18 @@ public class RestaurantService {
     public Page<Restaurant> searchRestaurant(
             String keyword,
             String borough,
+            String cuisine,
             Pageable pageable
     ) {
 
         if (keyword == null) keyword = "";
         if (borough == null) borough = "";
+        if (cuisine == null) cuisine = "";
 
         return restaurantRepo.searchRestaurant(
                 keyword,
                 borough,
+                cuisine,
                 pageable
         );
     }

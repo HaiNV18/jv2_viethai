@@ -20,12 +20,20 @@ public class ItemController {
     public ItemService itemService;
 
     @GetMapping(value = "/list", produces = MediaType.TEXT_HTML_VALUE)
-    public String showListPage(@RequestParam(defaultValue = "0") int page, Model model) {
+    public String showListPage(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(required = false) String name, // không bat buoc nhap name
+            @RequestParam(required = false) Integer price,
+            Model model
+    ) {
+        System.out.println(price);
         int pageSize = 10;	//mỗi trang hiển thị tối đa 10 dữ liệu
         Page<Item> itemPage =
-                itemService.findAllPagination(
-                        PageRequest.of(page, pageSize, Sort.by("name").ascending())
+                itemService.searchItem(
+                        name,
+                        PageRequest.of(page, pageSize)
                 );
+
         int totalPages = itemPage.getTotalPages();
         int currentPage = page;
         int maxPagesToShow = 5;	//hiển thị tối đa 5 chỉ số trang

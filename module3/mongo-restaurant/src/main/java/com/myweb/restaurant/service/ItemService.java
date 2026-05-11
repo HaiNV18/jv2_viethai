@@ -38,5 +38,21 @@ public class ItemService {
         return itemRepo.save(oldObject);
     }
 
+    public Page<Item> searchItem(
+            String name,
+            Pageable pageable
+    ) {
+
+        if (name == null) name = "";
+//        if (price == null) price = 0.0;
+
+        return itemRepo.searchItem(
+                name,
+                pageable
+        );
+    }
+
+
+
 
 }

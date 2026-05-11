@@ -53,10 +53,13 @@
                     <div class="card-body">
                         <form th:action="@{/restaurant/list}" method="get" class="row g-3">
                             <div class="col-auto">
-                                <input type="text" name="keyword" class="form-control" th:value="${keyword}">
+                                <input type="text" name="keyword" class="form-control" th:value="${keyword}" placeholder="Name">
                             </div>
                             <div class="col-auto">
-                                <input type="text" name="borough" class="form-control" th:value="${borough}">
+                                <input type="text" name="borough" class="form-control" th:value="${borough}" placeholder="Borough">
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" name="cuisine" class="form-control" th:value="${cuisine}" placeholder="Cuisine">
                             </div>
 
                             <div class="col-auto">

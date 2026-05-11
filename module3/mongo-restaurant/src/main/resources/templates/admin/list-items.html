@@ -51,10 +51,17 @@
                 </ol>
                 <div class="card mb-4">
                     <div class="card-body">
-                        <form th:action="" method="post">
-                            <input type="text" id="titleItem" name="title" class="form-control">
+                        <form th:action="@{/item/list}" method="get" class="row g-3">
+                            <div class="col-auto">
+                                <input type="text" id="titleItem" name="name" class="form-control" placeholder="Name">
+                            </div>
+                            <div class="col-auto">
+                                <input type="number" id="priceItem" name="price" class="form-control" placeholder="Price">
+                            </div>
 
-                            <button type="submit" class="btn btn-primary">Search</button>
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-primary">Search</button>
+                            </div>
                         </form>
                     </div>
                 </div>
