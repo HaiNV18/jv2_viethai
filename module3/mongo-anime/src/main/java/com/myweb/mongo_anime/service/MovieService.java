@@ -32,9 +32,9 @@ public class MovieService {
 
         //gom nhóm theo language và đếm số lượng trong từng nhóm
         return movies.stream()
-                .filter(m -> m.getOriginal_language() != null)
+                .filter(m -> m.getOriginalLanguage() != null)
                 .collect(Collectors.groupingBy(
-                        Movie::getOriginal_language,
+                        Movie::getOriginalLanguage,
                         Collectors.counting()
                 ));
     }

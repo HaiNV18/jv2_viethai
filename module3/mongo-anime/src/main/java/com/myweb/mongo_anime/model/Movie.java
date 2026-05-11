@@ -19,12 +19,19 @@ public class Movie {
     private String overview;
     @Field("Release_Date")
     private String releaseDate;
+    @Field("Original_Language")
+    private String originalLanguage;
     @Field("Comment")
     private Integer comment;
     @Field("VoteCount")
     private Integer vote_count;
     @Field("VoteAverage")
-    private Integer vote_average;
+    private Double vote_average;
+
+    // constructor dùng cho test
+    public Movie(Double vote) {
+        this.vote_average = vote;
+    }
 
     public boolean isHighlyRated() {
         return this.vote_average >= 8.0;
