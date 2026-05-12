@@ -32,7 +32,10 @@ public class DashboardController {
                         LinkedHashMap::new
                 ));
 
-        model.addAttribute("languageCounts", filtered);	//truyền dữ liệu qua trang web
+        Integer countMovies = movieService.countMovies();
+
+        model.addAttribute("countMovies", countMovies);
+        model.addAttribute("languageCounts", filtered);
 
         return "admin/index";
     }

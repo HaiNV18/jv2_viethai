@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
+    <!--<meta charset="utf-8">-->
     <title>DASHMIN - Bootstrap Admin Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
@@ -30,7 +29,6 @@
     <!-- Template Stylesheet -->
     <link href="/admin/css/style.css" rel="stylesheet">
 </head>
-
 <body>
 <div class="container-xxl position-relative bg-white d-flex p-0">
     <!-- Spinner Start -->
@@ -52,51 +50,48 @@
             <div class="row g-4">
                 <div class="col-sm-12 col-xl-12">
                     <div class="bg-light rounded h-100 p-4">
-                        <h6 class="mb-4">Horizontal Form</h6>
-                        <form>
+                        <h6 class="mb-4">Create Movie</h6>
+                        <form th:action="@{/admin/movie/insert}" method="post">
                             <div class="row mb-3">
-                                <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                                <label for="titleMovie" class="col-sm-2 col-form-label">Title</label>
                                 <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="inputEmail3">
+                                    <input type="text" class="form-control" id="titleMovie" name="title">
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                                <label for="yearMovie" class="col-sm-2 col-form-label">Year</label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control" id="inputPassword3">
+                                    <input type="number" class="form-control" id="yearMovie" name="year">
                                 </div>
                             </div>
-                            <fieldset class="row mb-3">
-                                <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
-                                <div class="col-sm-10">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gridRadios"
-                                               id="gridRadios1" value="option1" checked>
-                                        <label class="form-check-label" for="gridRadios1">
-                                            First radio
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gridRadios"
-                                               id="gridRadios2" value="option2">
-                                        <label class="form-check-label" for="gridRadios2">
-                                            Second radio
-                                        </label>
-                                    </div>
-                                </div>
-                            </fieldset>
                             <div class="row mb-3">
-                                <legend class="col-form-label col-sm-2 pt-0">Checkbox</legend>
+                                <label for="directorMovie" class="col-sm-2 col-form-label">Director</label>
                                 <div class="col-sm-10">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="gridCheck1">
-                                        <label class="form-check-label" for="gridCheck1">
-                                            Check me out
-                                        </label>
-                                    </div>
+                                    <input type="text" class="form-control" id="directorMovie" name="director">
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Sign in</button>
+                            <div class="row mb-3">
+                                <label for="overviewMovie" class="col-sm-2 col-form-label">Overview</label>
+                                <div class="col-sm-10">
+                                    <textarea type="text" class="form-control" id="overviewMovie" name="overview"></textarea>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="thumbnailMovie" class="col-sm-2 col-form-label">Thumbnail</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="thumbnailMovie" name="thumbnail" value="image.jpg">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="languageMovie" class="col-sm-2 col-form-label">Language</label>
+                                <div class="col-sm-10">
+                                    <select id="languageMovie" name="originalLanguage">
+                                        <option value="EN">EN</option>
+                                        <option value="JP">JP</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save</button>
                         </form>
                     </div>
                 </div>

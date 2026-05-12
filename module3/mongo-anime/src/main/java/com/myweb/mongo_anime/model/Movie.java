@@ -29,11 +29,11 @@ public class Movie {
     private Double vote_average;
 
     // constructor dùng cho test
-    public Movie(Double vote) {
-        this.vote_average = vote;
-    }
-
-    public boolean isHighlyRated() {
-        return this.vote_average >= 8.0;
-    }
+//    public Movie(Double vote) {
+//        this.vote_average = vote;
+//    }
+//
+//    public boolean isHighlyRated() {
+//        return this.vote_average >= 8.0;
+//    }
 }

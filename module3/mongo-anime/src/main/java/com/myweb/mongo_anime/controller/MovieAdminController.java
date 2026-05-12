@@ -9,10 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin")
@@ -26,7 +23,7 @@ public class MovieAdminController {
 
     @GetMapping(value = "/movie/list", produces = MediaType.TEXT_HTML_VALUE)
     public String showMovieList(@RequestParam(defaultValue = "0") int page, Model model) {
-        int pageSize = 3;	//số lượng movie hiển thị trong 1 trang
+        int pageSize = 10;	//số lượng movie hiển thị trong 1 trang
         Page<Movie> moviePage = movieService.findAllPagination(PageRequest.of(page, pageSize));
         int totalPages = moviePage.getTotalPages();
         int currentPage = page;	//chỉ số của trang hiện tại
@@ -48,4 +45,13 @@ public class MovieAdminController {
     public String showCreate(Model model) {
         return "admin/insert-movie";
     }
+
+    @PostMapping("/movie/insert")
+    public String insertMovie(@ModelAttribute("movie") Movie req) {
+        req.setReleaseDate("2019-04-20");
+        movieService.saveMovie(req);
+        return "redirect:/admin/movie/list";
+    }
+
 }
+

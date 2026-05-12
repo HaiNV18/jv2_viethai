@@ -21,6 +21,10 @@ public class MovieService {
         return movieRepo.findAll(pageable);
     }
 
+    public Movie saveMovie(Movie movie){
+        return movieRepo.save(movie);
+    }
+
     public Integer countMovies() {
         List<Movie> movies = movieRepo.findAll();
         Integer count = (int) movies.stream().count();
