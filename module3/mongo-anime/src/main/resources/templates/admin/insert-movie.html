@@ -51,7 +51,7 @@
                 <div class="col-sm-12 col-xl-12">
                     <div class="bg-light rounded h-100 p-4">
                         <h6 class="mb-4">Create Movie</h6>
-                        <form th:action="@{/admin/movie/insert}" method="post">
+                        <form th:action="@{/admin/movie/insert}" method="post" enctype="multipart/form-data">
                             <div class="row mb-3">
                                 <label for="titleMovie" class="col-sm-2 col-form-label">Title</label>
                                 <div class="col-sm-10">
@@ -77,9 +77,9 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="thumbnailMovie" class="col-sm-2 col-form-label">Thumbnail</label>
+                                <label class="col-sm-2 col-form-label">Thumbnail</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="thumbnailMovie" name="thumbnail" value="image.jpg">
+                                    <input type="file" class="form-control" id="thumbnailMovie" name="thumbnailFile">
                                 </div>
                             </div>
                             <div class="row mb-3">

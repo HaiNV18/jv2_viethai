@@ -14,9 +14,10 @@ public class MovieApiController {
     public MovieService movieService;
 
     @PostMapping("/movie/insert")
-    public String insertMovie(@RequestBody Movie req) {
+    public String insertMovie(Movie req) {
         movieService.saveMovie(req);
         return "success";
+        // return "redirect:/admin/movie/list"; // Phải dùng @Controller mới redirect được
     }
 
 

@@ -10,6 +10,10 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/admin")
@@ -46,12 +50,34 @@ public class MovieAdminController {
         return "admin/insert-movie";
     }
 
+//    @PostMapping("/movie/insert")
+//    public String insertMovie(@ModelAttribute("movie") Movie req) {
+//        req.setReleaseDate("2019-04-20");
+//        movieService.saveMovie(req);
+//        return "redirect:/admin/movie/list";
+//    }
+
     @PostMapping("/movie/insert")
-    public String insertMovie(@ModelAttribute("movie") Movie req) {
+    public String insertMovie(
+            @ModelAttribute("movie") Movie req,
+            @RequestParam("thumbnailFile") MultipartFile file
+    ) throws IOException {
+
+        String fileName = file.getOriginalFilename();
+        String uploadDir = System.getProperty("user.dir")
+                + "/src/main/resources/static/uploads/";
+        File dir = new File(uploadDir);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        file.transferTo(new File(uploadDir + fileName));
+
+        // Save file to database
+        req.setThumbnail(fileName);
         req.setReleaseDate("2019-04-20");
         movieService.saveMovie(req);
+
         return "redirect:/admin/movie/list";
     }
-
 }
 
