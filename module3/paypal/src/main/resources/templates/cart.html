@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Giỏ hàng</title>
+
+    <script
+            src="https://www.paypal.com/sdk/js?client-id=BAAQxHpvlsYrkynqAJeyYvZfhkWgFDjd4R0oVI48X5llNUXeB3Z98X0XA5lw8LYk4B6usPqy-GGev20qlM&components=hosted-buttons&disable-funding=venmo&currency=USD">
+    </script>
+
 </head>
 <body>
 
@@ -29,18 +34,53 @@
 <h2>Tổng thanh toán: $<span th:text="${total}"></span></h2>
 
 <!-- Paypal Button -->
-<div>
-    <div>
-        <style>.pp-2WD7SUEXD8BZW{text-align:center;border:none;border-radius:0.25rem;min-width:11.625rem;padding:0 2rem;height:2.625rem;font-weight:bold;background-color:#FFD140;color:#000000;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.25rem;cursor:pointer;}</style>
+<!-- Lien Ket va Nut Thanh Toan -->
+<!--<div>-->
+<!--    <div>-->
+<!--        <style>.pp-2WD7SUEXD8BZW{text-align:center;border:none;border-radius:0.25rem;min-width:11.625rem;padding:0 2rem;height:2.625rem;font-weight:bold;background-color:#FFD140;color:#000000;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.25rem;cursor:pointer;}</style>-->
 
-        <form action="https://www.paypal.com/ncp/payment/2WD7SUEXD8BZW" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
-            <input class="pp-2WD7SUEXD8BZW" type="submit" value="Mua ngay" />
-            <img src=https://www.paypalobjects.com/images/Debit_Credit.svg alt="cards" />
-            <section style="font-size: 0.75rem;"> Được cung cấp bởi <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
-        </form>
-    </div>
+<!--        <form action="https://www.paypal.com/ncp/payment/2WD7SUEXD8BZW" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">-->
+<!--            <input class="pp-2WD7SUEXD8BZW" type="submit" value="Mua ngay" />-->
+<!--            <img src=https://www.paypalobjects.com/images/Debit_Credit.svg alt="cards" />-->
+<!--            <section style="font-size: 0.75rem;"> Được cung cấp bởi <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</div>-->
 
-</div>
+<!--<div>-->
+<!--    <style>.pp-AZHDENUQX2X9S{text-align:center;border:none;border-radius:0.25rem;min-width:11.625rem;padding:0 2rem;height:2.625rem;font-weight:bold;background-color:#FFD140;color:#000000;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.25rem;cursor:pointer;}</style>-->
+<!--    <form action="https://www.paypal.com/ncp/payment/AZHDENUQX2X9S" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">-->
+<!--        <input class="pp-AZHDENUQX2X9S" type="submit" value="Mua ngay" />-->
+<!--        <img src=https://www.paypalobjects.com/images/Debit_Credit.svg alt="cards" />-->
+<!--        <section style="font-size: 0.75rem;"> Được cung cấp bởi <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>-->
+<!--    </form>-->
+<!--</div>-->
+
+<!-- Mua Ngay Buy Now -->
+<!--<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">-->
+<!--    <input type="hidden" name="cmd" value="_s-xclick" />-->
+<!--    <input type="hidden" name="hosted_button_id" value="VLB5REGWMU3VS" />-->
+<!--    <input type="hidden" name="currency_code" value="USD" />-->
+<!--    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" title="PayPal – Phương thức thanh toán trực tuyến an toàn và thuận tiện hơn!" alt="Mua ngay" />-->
+<!--</form>-->
+
+<!-- nut gio hang -->
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+    <input type="hidden" name="cmd" value="_s-xclick" />
+    <input type="hidden" name="hosted_button_id" value="6776252L5NKWG" />
+    <input type="hidden" name="currency_code" value="USD" />
+    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_cart_SM.gif" border="0" name="submit" title="PayPal – Phương thức thanh toán trực tuyến an toàn và thuận tiện hơn!" alt="Thêm vào giỏ hàng" />
+</form>
+
+
+
+
+<!--<div id="paypal-container-AZHDENUQX2X9S"></div>-->
+<!--<script>-->
+<!--    paypal.HostedButtons({-->
+<!--        hostedButtonId: "AZHDENUQX2X9S",-->
+<!--    }).render("#paypal-container-AZHDENUQX2X9S")-->
+<!--</script>-->
 
 </body>
 </html>

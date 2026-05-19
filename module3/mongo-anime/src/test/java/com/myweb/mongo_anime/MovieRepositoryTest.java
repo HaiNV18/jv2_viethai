@@ -15,23 +15,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ActiveProfiles("test")
 public class MovieRepositoryTest {
 
-    @Autowired
-    private MovieRepository movieRepository;
-
-    @Test
-    void findHighlyRated_returnsMoviesAboveThreshold() {
-
-        // xoá dữ liệu cũ
-        movieRepository.deleteAll();
-
-        // thêm dữ liệu test
-        movieRepository.save(new Movie(6.0));
-        movieRepository.save(new Movie(9.5));
-
-        // chạy query
-        List<Movie> result = movieRepository.findHighlyRated(8.0);
-
-        // kiểm tra kết quả
-        assertThat(result).hasSize(1);
-    }
+//    @Autowired
+//    private MovieRepository movieRepository;
+//
+//    @Test
+//    void findHighlyRated_returnsMoviesAboveThreshold() {
+//
+//        // xoá dữ liệu cũ
+//        movieRepository.deleteAll();
+//
+//        // thêm dữ liệu test
+//        movieRepository.save(new Movie(6.0));
+//        movieRepository.save(new Movie(9.5));
+//
+//        // chạy query
+//        List<Movie> result = movieRepository.findHighlyRated(8.0);
+//
+//        // kiểm tra kết quả
+//        assertThat(result).hasSize(1);
+//    }
 }

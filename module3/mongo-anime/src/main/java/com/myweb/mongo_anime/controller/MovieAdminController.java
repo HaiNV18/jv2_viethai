@@ -3,6 +3,7 @@ package com.myweb.mongo_anime.controller;
 import com.myweb.mongo_anime.model.Movie;
 import com.myweb.mongo_anime.service.CommentService;
 import com.myweb.mongo_anime.service.MovieService;
+import com.myweb.mongo_anime.utils.DateUtil;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/admin")
@@ -49,13 +51,22 @@ public class MovieAdminController {
 
     @GetMapping("/movie/detail/{movieId}")
     public String showMovieDetail(@PathVariable String movieId, Model model) {
-        Movie movie = movieService.findById(movieId);
-        model.addAttribute("movie", movie);
+        try {
+            Movie movie = movieService.findById(movieId);
+            model.addAttribute("movie", movie);
+        } catch (Exception e) {
+            System.out.println("Something went wrong.");
+            return "redirect:/admin/movie/list";
+        }
         return "admin/update-movie";
     }
 
     @GetMapping("/movie/create")
     public String showCreate(Model model) {
+        System.out.println(new Date());
+        System.out.println(DateUtil.getDayShort("2026-05-08T00:32", DateUtil.FORMAT_YYYY_MM_DD_T_HH_MM));
+        System.out.println(DateUtil.getDayFull("2026-05-19 08:24:12", DateUtil.FORMAT_YYYY_MM_DD_HH_MM_SS));
+        System.out.println(DateUtil.formatDateToday(DateUtil.FORMAT_YYYY_MM_DD));
         model.addAttribute("movie", new Movie());
         return "admin/insert-movie";
     }
@@ -92,9 +103,19 @@ public class MovieAdminController {
         }
         file.transferTo(new File(uploadDir + fileName));
 
+        Integer year = DateUtil.getYear(req.getReleaseDate(), DateUtil.FORMAT_YYYY_MM_DD);
+        System.out.println("Format");
+        System.out.println(year);
+
         // Save file to database
         req.setThumbnail(fileName);
-        req.setReleaseDate("2019-04-20");
+        req.setYear(year.toString());
+
+        if (req.getId() == null) {
+            req.setCreateDate(DateUtil.formatDateToday(DateUtil.FORMAT_YYYY_MM_DD)); // Insert
+        }
+        req.setUpdateDate(DateUtil.formatDateToday(DateUtil.FORMAT_YYYY_MM_DD)); // Update
+
         movieService.saveMovie(req);
 
         return "redirect:/admin/movie/list";

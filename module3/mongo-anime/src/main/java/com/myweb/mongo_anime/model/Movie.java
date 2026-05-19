@@ -21,12 +21,20 @@ public class Movie {
 
     @Field("Year")
     private String year;
+
+    @NotBlank(message = "Director is required")
+    @Size(min = 2, max = 50, message = "Director must be 2-50 characters")
     @Field("Director")
     private String director;
+
     @Field("Thumbnail")
     private String thumbnail;
+
+    @NotBlank(message = "Overview is required")
+    @Size(min = 2, max = 200, message = "Overview must be 2-200 characters")
     @Field("Overview")
     private String overview;
+
     @Field("Release_Date")
     private String releaseDate;
     @Field("Original_Language")
@@ -37,6 +45,12 @@ public class Movie {
     private Integer vote_count;
     @Field("VoteAverage")
     private Double vote_average;
+
+    @Field("Create_Date")
+    private String createDate;
+
+    @Field("Update_Date")
+    private String updateDate;
 
     // constructor dùng cho test
 //    public Movie(Double vote) {

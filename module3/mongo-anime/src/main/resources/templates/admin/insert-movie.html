@@ -56,26 +56,21 @@
                                 <label for="titleMovie" class="col-sm-2 col-form-label">Title</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="titleMovie" th:field="*{title}">
-                                    <div class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="yearMovie" class="col-sm-2 col-form-label">Year</label>
-                                <div class="col-sm-10">
-                                    <input type="number" class="form-control" id="yearMovie" name="year">
+                                    <div class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="directorMovie" class="col-sm-2 col-form-label">Director</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="directorMovie" name="director">
+                                    <div class="text-danger" th:if="${#fields.hasErrors('director')}" th:errors="*{director}"></div>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="overviewMovie" class="col-sm-2 col-form-label">Overview</label>
                                 <div class="col-sm-10">
                                     <textarea type="text" class="form-control" id="overviewMovie" name="overview"></textarea>
+                                    <div class="text-danger" th:if="${#fields.hasErrors('overview')}" th:errors="*{overview}"></div>
                                 </div>
                             </div>
                             <div class="row mb-3">

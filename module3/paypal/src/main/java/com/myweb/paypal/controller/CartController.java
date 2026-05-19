@@ -20,8 +20,8 @@ public class CartController {
     public String cart2(Model model) {
 
         String productName = "Áo thun Premium";
-        double price = 15.99;
-        int qty = 2;
+        double price = 12.99;
+        int qty = 3;
 
         double total = price * qty;
         model.addAttribute("productName", productName);
