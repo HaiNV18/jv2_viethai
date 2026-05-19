@@ -21,6 +21,10 @@ public class MovieService {
         return movieRepo.findAll(pageable);
     }
 
+    public Movie findById(String id) {
+        return movieRepo.findById(id).orElse(null);
+    }
+
     public Movie saveMovie(Movie movie){
         return movieRepo.save(movie);
     }

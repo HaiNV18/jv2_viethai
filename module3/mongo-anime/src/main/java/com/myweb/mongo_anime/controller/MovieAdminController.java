@@ -3,12 +3,14 @@ package com.myweb.mongo_anime.controller;
 import com.myweb.mongo_anime.model.Movie;
 import com.myweb.mongo_anime.service.CommentService;
 import com.myweb.mongo_anime.service.MovieService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -45,23 +47,41 @@ public class MovieAdminController {
         return "admin/list-movie";	//đường dẫn tới file HTML trong templates
     }
 
+    @GetMapping("/movie/detail/{movieId}")
+    public String showMovieDetail(@PathVariable String movieId, Model model) {
+        Movie movie = movieService.findById(movieId);
+        model.addAttribute("movie", movie);
+        return "admin/update-movie";
+    }
+
     @GetMapping("/movie/create")
     public String showCreate(Model model) {
+        model.addAttribute("movie", new Movie());
         return "admin/insert-movie";
     }
 
-//    @PostMapping("/movie/insert")
-//    public String insertMovie(@ModelAttribute("movie") Movie req) {
-//        req.setReleaseDate("2019-04-20");
-//        movieService.saveMovie(req);
-//        return "redirect:/admin/movie/list";
-//    }
-
     @PostMapping("/movie/insert")
     public String insertMovie(
-            @ModelAttribute("movie") Movie req,
+            @Valid @ModelAttribute("movie") Movie req,
+            BindingResult result,
             @RequestParam("thumbnailFile") MultipartFile file
     ) throws IOException {
+
+        // validation model
+        if (result.hasErrors()) {
+            return "admin/insert-movie";
+        }
+
+        // validation file
+        if (file.isEmpty()) {
+
+            result.rejectValue(
+                    "thumbnail",
+                    "error.movie",
+                    "Thumbnail is required"
+            );
+            return "admin/insert-movie";
+        }
 
         String fileName = file.getOriginalFilename();
         String uploadDir = System.getProperty("user.dir")

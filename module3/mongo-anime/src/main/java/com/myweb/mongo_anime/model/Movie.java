@@ -1,14 +1,24 @@
 package com.myweb.mongo_anime.model;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Data
 @Document(collection = "movies")
 public class Movie {
+
+    @Id
+    private String id;
+
+    @NotBlank(message = "Title is required")
+    @Size(min = 2, max = 100, message = "Title must be 2-100 characters")
     @Field("Title")
     private String title;
+
     @Field("Year")
     private String year;
     @Field("Director")

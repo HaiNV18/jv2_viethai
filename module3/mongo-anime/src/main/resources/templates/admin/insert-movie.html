@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <!--<meta charset="utf-8">-->
     <title>DASHMIN - Bootstrap Admin Template</title>
@@ -51,11 +51,13 @@
                 <div class="col-sm-12 col-xl-12">
                     <div class="bg-light rounded h-100 p-4">
                         <h6 class="mb-4">Create Movie</h6>
-                        <form th:action="@{/admin/movie/insert}" method="post" enctype="multipart/form-data">
+                        <form th:action="@{/admin/movie/insert}" method="post" th:object="${movie}" enctype="multipart/form-data">
                             <div class="row mb-3">
                                 <label for="titleMovie" class="col-sm-2 col-form-label">Title</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="titleMovie" name="title">
+                                    <input type="text" class="form-control" id="titleMovie" th:field="*{title}">
+                                    <div class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
+                                    </div>
                                 </div>
                             </div>
                             <div class="row mb-3">
