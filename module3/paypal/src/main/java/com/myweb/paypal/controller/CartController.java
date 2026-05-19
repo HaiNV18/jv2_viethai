@@ -15,4 +15,19 @@ public class CartController {
         model.addAttribute("total", 31.98);
         return "cart";
     }
+
+    @GetMapping("/cart-2")
+    public String cart2(Model model) {
+
+        String productName = "Áo thun Premium";
+        double price = 15.99;
+        int qty = 2;
+
+        double total = price * qty;
+        model.addAttribute("productName", productName);
+        model.addAttribute("price", price);
+        model.addAttribute("qty", qty);
+        model.addAttribute("total", total);
+        return "cart-2";
+    }
 }
