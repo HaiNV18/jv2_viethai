@@ -1,5 +1,6 @@
 package com.myweb.mongo_anime.service;
 
+import com.myweb.mongo_anime.dto.ChartDTO;
 import com.myweb.mongo_anime.model.Movie;
 import com.myweb.mongo_anime.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,5 +58,9 @@ public class MovieService {
 
     public List<Movie> findTop10ByOrderByVoteCountDesc() {
         return movieRepo.findTop10ByOrderByVoteCountDesc();
+    }
+
+    public List<ChartDTO> getMoviesByGenre() {
+        return movieRepo.getMoviesByGenre();
     }
 }

@@ -26,8 +26,8 @@
                         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-line fa-3x text-primary"></i>
                             <div class="ms-3">
-                                <p class="mb-2">Movies</p>
-                                <h6 class="mb-0" th:text="${countMovies}"></h6>
+                                <p class="mb-2">English</p>
+                                <h6 class="mb-0" th:text="${movieEng}"></h6>
                             </div>
                         </div>
                     </div>
@@ -35,8 +35,8 @@
                         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-bar fa-3x text-primary"></i>
                             <div class="ms-3">
-                                <p class="mb-2">Total Sale</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <p class="mb-2">Japanese</p>
+                                <h6 class="mb-0" th:text="${movieJapan}"></h6>
                             </div>
                         </div>
                     </div>
@@ -44,8 +44,8 @@
                         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-area fa-3x text-primary"></i>
                             <div class="ms-3">
-                                <p class="mb-2">Today Revenue</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <p class="mb-2">Korea</p>
+                                <h6 class="mb-0" th:text="${movieKorea}"></h6>
                             </div>
                         </div>
                     </div>
@@ -53,8 +53,8 @@
                         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-pie fa-3x text-primary"></i>
                             <div class="ms-3">
-                                <p class="mb-2">Total Revenue</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <p class="mb-2">France</p>
+                                <h6 class="mb-0" th:text="${movieFrance}"></h6>
                             </div>
                         </div>
                     </div>
@@ -63,19 +63,35 @@
             <!-- Sale & Revenue End -->
 
             <!-- Sales Chart Start -->
+<!--            <div class="container-fluid pt-4 px-4">-->
+<!--                <div class="row g-4">-->
+<!--                    <div class="col-sm-12 col-xl-6">-->
+<!--                        <div class="bg-light text-center rounded p-4">-->
+<!--                            <div class="d-flex align-items-center justify-content-between mb-4">-->
+<!--                                <h6 class="mb-0">Number of movies</h6>-->
+<!--                                <a href="">Show All</a>-->
+<!--                            </div>-->
+<!--                            <canvas id="barChart"></canvas>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-light text-center rounded p-4">
                             <div class="d-flex align-items-center justify-content-between mb-4">
-                                <h6 class="mb-0">Number of movies</h6>
+                                <h6 class="mb-0">Movies by genre</h6>
                                 <a href="">Show All</a>
                             </div>
-                            <canvas id="barChart"></canvas>
+                            <canvas id="genreChart"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
+
 
             <!-- Sales Chart Start -->
             <div class="container-fluid pt-4 px-4">
@@ -226,52 +242,68 @@
     <script src="js/main.js"></script>
 
     <script th:inline="javascript">
-        const languages = [[${languageCounts.keySet()}]];
-        const counts = [[${languageCounts.values()}]];
-        const ctx = document.getElementById('barChart').getContext('2d');
+        const languages = [[${listMoviesByGenre.keySet()}]];
+        const counts = [[${listMoviesByGenre.values()}]];
+        const ctx = document.getElementById('genreChart').getContext('2d');
 
         new Chart(ctx, {
           type: 'bar',
           data: {
             labels: languages,
             datasets: [{
-              label: 'Number of Movies',
+              label: 'Movies by genre',
               data: counts,
               backgroundColor: 'blue'
             }]
           }
         });
 
+        // Genre Chart
+        // const genres = [[${listMoviesByGenre.keySet()}]];
+        // const countGenre = [[${listMoviesByGenre.values()}]];
+        // console.log(genres)
+        // console.log(countGenre)
+        // const ctxGenre = document.getElementById('genreChart').getContext('2d');
+        // new Chart(ctxGenre, {
+        //     type: 'bar',
+        //     data: {
+        //         labels: genres,
+        //         datasets: [{
+        //             label: 'Movies by genre',
+        //             data: countGenre,
+        //             backgroundColor: 'blue'
+        //         }]
+        //     }
+        // });
+
 
         // Genre Chart
-        new Chart(document.getElementById('genreChart'), {
-            type: 'bar',
-            data: {
-                labels: genres.map(x => x.label),
-                datasets: [{
-                    label: 'Movies By Genre',
-                    data: genres.map(x => x.value),
-                    borderWidth: 1
-                }]
-            },
-
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: true
-                    }
-                },
-
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-
-        //<div class="chart-container"><canvas id="genreChart"></canvas></div>
+        // new Chart(document.getElementById('genreChart'), {
+        //     type: 'bar',
+        //     data: {
+        //         labels: genres.map(x => x.label),
+        //         datasets: [{
+        //             label: 'Movies By Genre',
+        //             data: genres.map(x => x.value),
+        //             borderWidth: 1
+        //         }]
+        //     },
+        //
+        //     options: {
+        //         responsive: true,
+        //         plugins: {
+        //             legend: {
+        //                 display: true
+        //             }
+        //         },
+        //
+        //         scales: {
+        //             y: {
+        //                 beginAtZero: true
+        //             }
+        //         }
+        //     }
+        // });
     </script>
 
 

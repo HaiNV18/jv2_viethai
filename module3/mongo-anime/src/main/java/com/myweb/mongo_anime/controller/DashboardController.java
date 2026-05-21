@@ -1,5 +1,6 @@
 package com.myweb.mongo_anime.controller;
 
+import com.myweb.mongo_anime.dto.ChartDTO;
 import com.myweb.mongo_anime.dto.MovieDTO;
 import com.myweb.mongo_anime.model.Movie;
 import com.myweb.mongo_anime.service.GenreService;
@@ -41,8 +42,30 @@ public class DashboardController {
                         LinkedHashMap::new
                 ));
 
-        // count movies
-        Integer countMovies = movieService.countMovies();
+        Long movieEng = 0L;
+        Long movieJapan = 0L;
+        Long movieKorea = 0L;
+        Long movieFrance = 0L;
+        if (filtered.get("EN") != null) {
+            movieEng = filtered.get("EN");
+        }
+        if (filtered.get("JP") != null) {
+            movieJapan = filtered.get("JP");
+        }
+        if (filtered.get("KR") != null) {
+            movieKorea = filtered.get("KR");
+        }
+        if (filtered.get("FR") != null) {
+            movieFrance = filtered.get("FR");
+        }
+
+        // Get movie by genres
+        List<ChartDTO> listMovieGenre = movieService.getMoviesByGenre();
+
+        Map<String, Integer> listMoviesByGenre = new LinkedHashMap<>();
+        for (ChartDTO item : listMovieGenre) {
+            listMoviesByGenre.put(item.getLabel(), item.getValue());
+        }
 
         // top movies by vote
         List<Movie> listVoteAverage = movieService.findTop5ByOrderByVoteAverageDesc();
@@ -66,8 +89,14 @@ public class DashboardController {
         // 10 movies most popular
         List<Movie> listMostPopular = movieService.findTop10ByOrderByVoteCountDesc();
 
-        model.addAttribute("countMovies", countMovies);
         model.addAttribute("languageCounts", filtered);
+        model.addAttribute("movieEng", movieEng);
+        model.addAttribute("movieJapan", movieJapan);
+        model.addAttribute("movieKorea", movieKorea);
+        model.addAttribute("movieFrance", movieFrance);
+
+        model.addAttribute("listMoviesByGenre", listMoviesByGenre);
+
         model.addAttribute("listTopVoteAverage", listTopVoteAverage);
         model.addAttribute("listRecentMovies", listRecentMovies);
         model.addAttribute("listMostPopular", listMostPopular);

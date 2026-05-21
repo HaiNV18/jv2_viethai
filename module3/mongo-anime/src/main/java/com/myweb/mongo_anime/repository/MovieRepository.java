@@ -14,8 +14,12 @@ public interface MovieRepository extends MongoRepository<Movie, String> {
     @Query("{ 'VoteAverage' : { $gte: ?0 } }")
     List<Movie> findHighlyRated(double minRating);
 
-//    @Aggregation()
-//    List<ChartDTO> getMoviesByLanguage();
+    @Aggregation(pipeline = {
+            "{ $group: { _id:  '$Genre', total:  {$sum:  1}}}",
+            "{ $sort: { total: -1 } } ",
+            "{ $project: { label: '$_id', value: '$total', _id: 0 } }"
+    })
+    List<ChartDTO> getMoviesByGenre();
 
     List<Movie> findTop5ByOrderByVoteAverageDesc(); // 5 phim danh gia cao nhat
 
