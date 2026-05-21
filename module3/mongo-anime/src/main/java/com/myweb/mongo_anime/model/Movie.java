@@ -7,6 +7,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.List;
+
 @Data
 @Document(collection = "movies")
 public class Movie {
@@ -19,9 +21,6 @@ public class Movie {
     @Field("Title")
     private String title;
 
-    @Field("Year")
-    private String year;
-
     @NotBlank(message = "Director is required")
     @Size(min = 2, max = 50, message = "Director must be 2-50 characters")
     @Field("Director")
@@ -31,7 +30,7 @@ public class Movie {
     private String thumbnail;
 
     @Field("Genre")
-    private String genre;
+    private List<String> genre;
 
     @NotBlank(message = "Overview is required")
     @Size(min = 2, max = 200, message = "Overview must be 2-200 characters")

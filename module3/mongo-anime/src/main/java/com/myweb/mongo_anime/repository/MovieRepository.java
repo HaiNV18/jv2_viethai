@@ -17,9 +17,9 @@ public interface MovieRepository extends MongoRepository<Movie, String> {
 //    @Aggregation()
 //    List<ChartDTO> getMoviesByLanguage();
 
-    List<Movie> findTop5ByOrderByVoteAverageDesc();
+    List<Movie> findTop5ByOrderByVoteAverageDesc(); // 5 phim danh gia cao nhat
 
-    List<Movie> findTop5ByOrderByReleaseDateDesc();
+    List<Movie> findTop5ByOrderByReleaseDateDesc(); // 5 phim phat hanh gan nhat
 
-    List<Movie> findTop10ByOrderByVoteCountDesc();
+    List<Movie> findTop10ByOrderByVoteCountDesc(); // 10 phim pho bien nhat
 }

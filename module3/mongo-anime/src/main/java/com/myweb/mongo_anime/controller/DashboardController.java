@@ -1,5 +1,8 @@
 package com.myweb.mongo_anime.controller;
 
+import com.myweb.mongo_anime.dto.MovieDTO;
+import com.myweb.mongo_anime.model.Movie;
+import com.myweb.mongo_anime.service.GenreService;
 import com.myweb.mongo_anime.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -19,8 +23,13 @@ public class DashboardController {
     @Autowired
     public MovieService movieService;
 
+    @Autowired
+    public GenreService genreService;
+
     @GetMapping(value = "/dashboard", produces = MediaType.TEXT_HTML_VALUE)
     public String showDashboard(Model model) {
+
+        // loc theo ngon ngu
         Map<String, Long> languageCounts = movieService.getAndGroupMoviesByLanguage();
         Map<String, Long> filtered = languageCounts.entrySet().stream()
                 // .filter(e -> e.getValue() > 50)	//lọc những nhóm nào có số lượng movie lớn hơn 50
@@ -32,10 +41,36 @@ public class DashboardController {
                         LinkedHashMap::new
                 ));
 
+        // count movies
         Integer countMovies = movieService.countMovies();
+
+        // top movies by vote
+        List<Movie> listVoteAverage = movieService.findTop5ByOrderByVoteAverageDesc();
+
+        List<MovieDTO> listTopVoteAverage = listVoteAverage.stream().map(item -> {
+            MovieDTO dto =  new MovieDTO();
+            dto.setTitle(item.getTitle());
+            dto.setLanguage(item.getOriginalLanguage());
+            dto.setVoteCount(item.getVoteCount());
+            dto.setVoteAverage(item.getVoteAverage());
+
+            List<String> listName = genreService.findNameByListId(item.getGenre());
+            dto.setGenre(String.join(", ", listName));
+
+            return dto;
+        }).collect(Collectors.toList());
+
+        // Recent movies
+        List<Movie> listRecentMovies = movieService.findTop5ByOrderByReleaseDateDesc();
+
+        // 10 movies most popular
+        List<Movie> listMostPopular = movieService.findTop10ByOrderByVoteCountDesc();
 
         model.addAttribute("countMovies", countMovies);
         model.addAttribute("languageCounts", filtered);
+        model.addAttribute("listTopVoteAverage", listTopVoteAverage);
+        model.addAttribute("listRecentMovies", listRecentMovies);
+        model.addAttribute("listMostPopular", listMostPopular);
 
         return "admin/index";
     }

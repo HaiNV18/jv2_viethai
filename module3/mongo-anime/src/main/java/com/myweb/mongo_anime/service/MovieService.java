@@ -50,4 +50,12 @@ public class MovieService {
     public List<Movie> findTop5ByOrderByVoteAverageDesc() {
         return movieRepo.findTop5ByOrderByVoteAverageDesc();
     }
+
+    public List<Movie> findTop5ByOrderByReleaseDateDesc() {
+        return movieRepo.findTop5ByOrderByReleaseDateDesc();
+    }
+
+    public List<Movie> findTop10ByOrderByVoteCountDesc() {
+        return movieRepo.findTop10ByOrderByVoteCountDesc();
+    }
 }

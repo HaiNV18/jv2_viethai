@@ -109,7 +109,6 @@ public class MovieAdminController {
 
         // Save file to database
         req.setThumbnail(fileName);
-        req.setYear(year.toString());
 
         if (req.getId() == null) {
             req.setCreateDate(DateUtil.formatDateToday(DateUtil.FORMAT_YYYY_MM_DD)); // Insert

@@ -31,7 +31,7 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Title</th>
-                                        <th scope="col">Year</th>
+                                        <th scope="col">Release Date</th>
                                         <th scope="col">Director</th>
                                         <th scope="col">Action</th>
                                     </tr>
@@ -40,7 +40,7 @@
                                     <tr th:each="item : ${list}">
                                         <th scope="row">1</th>
                                         <td th:text="${item.title}"></td>
-                                        <td th:text="${item.year}"></td>
+                                        <td th:text="${item.releaseDate}"></td>
                                         <td th:text="${item.director}"></td>
                                         <td><a th:href="@{/admin/movie/detail/{id}(id=${item.id})}">Edit</a></td>
                                     </tr>

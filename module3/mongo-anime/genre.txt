@@ -3,6 +3,8 @@ db.genre.insertMany([
   { name: "Adventure" },
   { name: "Drama" },
   { name: "Fantasy" },
+  { name: "Harem" },
+  { name: "Isekai" },
   { name: "Comedy" },
   { name: "Romance" },
   { name: "Psychological" },
