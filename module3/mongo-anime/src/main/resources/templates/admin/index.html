@@ -354,7 +354,41 @@
             }]
           }
         });
+
+
+        // Genre Chart
+        new Chart(document.getElementById('genreChart'), {
+            type: 'bar',
+            data: {
+                labels: genres.map(x => x.label),
+                datasets: [{
+                    label: 'Movies By Genre',
+                    data: genres.map(x => x.value),
+                    borderWidth: 1
+                }]
+            },
+
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true
+                    }
+                },
+
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        //<div class="chart-container"><canvas id="genreChart"></canvas></div>
     </script>
+
+
+
 </body>
 
 </html>

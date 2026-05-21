@@ -1,8 +1,39 @@
+const action = db.genre.findOne({ name: "Action" });
+const adventure = db.genre.findOne({ name: "Adventure" });
+const drama = db.genre.findOne({ name: "Drama" });
+const fantasy = db.genre.findOne({ name: "Fantasy" });
+const comedy = db.genre.findOne({ name: "Comedy" });
+const romance = db.genre.findOne({ name: "Romance" });
+const psychological = db.genre.findOne({ name: "Psychological" });
+const thriller = db.genre.findOne({ name: "Thriller" });
+const supernatural = db.genre.findOne({ name: "Supernatural" });
+const shounen = db.genre.findOne({ name: "Shounen" });
+const scifi = db.genre.findOne({ name: "Sci-Fi" });
+const sports = db.genre.findOne({ name: "Sports" });
+const mystery = db.genre.findOne({ name: "Mystery" });
+const horror = db.genre.findOne({ name: "Horror" });
+const sliceOfLife = db.genre.findOne({ name: "Slice of Life" });
+const isekai = db.genre.findOne({ name: "Isekai" });
+const magic = db.genre.findOne({ name: "Magic" });
+const school = db.genre.findOne({ name: "School" });
+const ecchi = db.genre.findOne({ name: "Ecchi" });
+const music = db.genre.findOne({ name: "Music" });
+const mecha = db.genre.findOne({ name: "Mecha" });
+const seinen = db.genre.findOne({ name: "Seinen" });
+const military = db.genre.findOne({ name: "Military" });
+const historical = db.genre.findOne({ name: "Historical" });
+const samurai = db.genre.findOne({ name: "Samurai" });
+const vampire = db.genre.findOne({ name: "Vampire" });
+const martialArts = db.genre.findOne({ name: "Martial Arts" });
+const game = db.genre.findOne({ name: "Game" });
+const demons = db.genre.findOne({ name: "Demons" });
+const harem = db.genre.findOne({ name: "Harem" });
+
 db.movies.insertMany([
   {
     "Title": "Attack on Titan",
-    "Year": "2013",
-    "Director": "Tetsurō Araki",
+    "Genre": [action._id, drama._id],
+    "Director": "Tetsurou Araki",
     "Thumbnail": "attack_on_titan.jpg",
     "Overview": "Humanity fights for survival against gigantic humanoid Titans that threaten to destroy civilization.",
     "Release_Date": "2013-04-07",
@@ -13,8 +44,7 @@ db.movies.insertMany([
   },
   {
     "Title": "Death Note",
-    "Year": "2006",
-    "Director": "Tetsurō Araki",
+    "Director": "Tetsurou Araki",
     "Thumbnail": "death_note.jpg",
     "Overview": "A high school student discovers a supernatural notebook that grants the power to kill anyone whose name is written in it.",
     "Release_Date": "2006-10-04",
@@ -25,7 +55,6 @@ db.movies.insertMany([
   },
   {
     "Title": "Naruto",
-    "Year": "2002",
     "Director": "Hayato Date",
     "Thumbnail": "naruto.jpg",
     "Overview": "A young ninja seeks recognition from his peers and dreams of becoming the Hokage.",
@@ -37,7 +66,6 @@ db.movies.insertMany([
   },
   {
     "Title": "One Piece",
-    "Year": "1999",
     "Director": "Konosuke Uda",
     "Thumbnail": "one_piece.jpg",
     "Overview": "Monkey D. Luffy sails with his pirate crew in search of the legendary treasure known as One Piece.",
@@ -49,7 +77,7 @@ db.movies.insertMany([
   },
   {
     "Title": "Demon Slayer",
-    "Year": "2019",
+    "Genre": [action._id, drama._id],
     "Director": "Haruo Sotozaki",
     "Thumbnail": "demon_slayer.jpg",
     "Overview": "A boy becomes a demon slayer after his family is slaughtered and his sister is turned into a demon.",
@@ -61,7 +89,6 @@ db.movies.insertMany([
   },
   {
     "Title": "Jujutsu Kaisen",
-    "Year": "2020",
     "Director": "Sunghoo Park",
     "Thumbnail": "jujutsu_kaisen.jpg",
     "Overview": "A teenager joins a secret organization of Jujutsu Sorcerers to eliminate a powerful curse.",
@@ -73,7 +100,6 @@ db.movies.insertMany([
   },
   {
     "Title": "Tokyo Ghoul",
-    "Year": "2014",
     "Director": "Shuhei Morita",
     "Thumbnail": "tokyo_ghoul.jpg",
     "Overview": "A college student becomes half-ghoul after a deadly encounter with a flesh-eating monster.",
@@ -85,7 +111,6 @@ db.movies.insertMany([
   },
   {
     "Title": "Fullmetal Alchemist: Brotherhood",
-    "Year": "2009",
     "Director": "Yasuhiro Irie",
     "Thumbnail": "fmab.jpg",
     "Overview": "Two brothers search for the Philosopher's Stone after an alchemy experiment goes wrong.",
@@ -97,7 +122,6 @@ db.movies.insertMany([
   },
   {
     "Title": "Bleach",
-    "Year": "2004",
     "Director": "Noriyuki Abe",
     "Thumbnail": "bleach.jpg",
     "Overview": "A teenager gains the powers of a Soul Reaper and protects humans from evil spirits.",
@@ -109,7 +133,6 @@ db.movies.insertMany([
   },
   {
     "Title": "Dragon Ball Z",
-    "Year": "1989",
     "Director": "Daisuke Nishio",
     "Thumbnail": "dragon_ball_z.jpg",
     "Overview": "Goku and his friends defend Earth against powerful enemies from across the universe.",
@@ -121,7 +144,6 @@ db.movies.insertMany([
   },
   {
     "Title": "Hunter x Hunter",
-    "Year": "2011",
     "Director": "Hiroshi Kōjina",
     "Thumbnail": "hunter_x_hunter.jpg",
     "Overview": "A young boy sets out to become a Hunter and find his missing father.",
@@ -133,7 +155,6 @@ db.movies.insertMany([
   },
   {
     "Title": "Steins;Gate",
-    "Year": "2011",
     "Director": "Hiroshi Hamasaki",
     "Thumbnail": "steins_gate.jpg",
     "Overview": "A group of friends accidentally invent time travel and face dangerous consequences.",
@@ -145,7 +166,6 @@ db.movies.insertMany([
   },
   {
     "Title": "Your Lie in April",
-    "Year": "2014",
     "Director": "Kyohei Ishiguro",
     "Thumbnail": "your_lie_in_april.jpg",
     "Overview": "A piano prodigy rediscovers his love for music through an eccentric violinist.",
@@ -157,7 +177,6 @@ db.movies.insertMany([
   },
   {
     "Title": "Sword Art Online",
-    "Year": "2012",
     "Director": "Tomohiko Ito",
     "Thumbnail": "sao.jpg",
     "Overview": "Players become trapped inside a virtual reality MMORPG where death in the game means death in real life.",
@@ -169,7 +188,6 @@ db.movies.insertMany([
   },
   {
     "Title": "Black Clover",
-    "Year": "2017",
     "Director": "Tatsuya Yoshihara",
     "Thumbnail": "black_clover.jpg",
     "Overview": "A boy born without magic strives to become the Wizard King.",
@@ -181,7 +199,6 @@ db.movies.insertMany([
   },
   {
     "Title": "Chainsaw Man",
-    "Year": "2022",
     "Director": "Ryū Nakayama",
     "Thumbnail": "chainsaw_man.jpg",
     "Overview": "A young devil hunter merges with his pet devil to survive in a brutal world.",
@@ -193,7 +210,6 @@ db.movies.insertMany([
   },
   {
     "Title": "Mob Psycho 100",
-    "Year": "2016",
     "Director": "Yuzuru Tachikawa",
     "Thumbnail": "mob_psycho_100.jpg",
     "Overview": "A powerful psychic middle schooler struggles to live a normal life.",
@@ -205,7 +221,6 @@ db.movies.insertMany([
   },
   {
     "Title": "Re:Zero",
-    "Year": "2016",
     "Director": "Masaharu Watanabe",
     "Thumbnail": "rezero.jpg",
     "Overview": "A teenager is transported to another world where he discovers he can return from death.",
@@ -217,7 +232,6 @@ db.movies.insertMany([
   },
   {
     "Title": "Vinland Saga",
-    "Year": "2019",
     "Director": "Shūhei Yabuta",
     "Thumbnail": "vinland-saga.jpg",
     "Overview": "A young Viking warrior seeks revenge against the mercenary leader who killed his father.",
@@ -229,7 +243,6 @@ db.movies.insertMany([
   },
   {
     "Title": "Blue Lock",
-    "Year": "2022",
     "Director": "Tetsuaki Watanabe",
     "Thumbnail": "blue-lock.jpg",
     "Overview": "Japan creates an intense soccer training program to produce the world's best striker.",
@@ -238,5 +251,167 @@ db.movies.insertMany([
     "Comment": 110,
     "VoteCount": 240,
     "VoteAverage": 8.3
+  },
+  {
+    "Title": "Date A Live",
+    "Director": "Keitaro Motonaga",
+    "Thumbnail": "date_a_live.jpg",
+    "Overview": "A high school boy must seal the powers of mysterious Spirits by making them fall in love with him.",
+    "Release_Date": "2013-04-06",
+    "Original_Language": "JA",
+    "Comment": 96,
+    "VoteCount": 240,
+    "VoteAverage": 7.5
+  },
+  {
+    "Title": "Frieren: Beyond Journey's End",
+    "Director": "Keiichiro Saito",
+    "Thumbnail": "frieren_beyond_journeys_end.jpg",
+    "Overview": "An elven mage reflects on life and friendship after the hero's journey has already ended.",
+    "Release_Date": "2023-09-29",
+    "Original_Language": "JA",
+    "Comment": 185,
+    "VoteCount": 520,
+    "VoteAverage": 9.3
+  },
+  {
+    "Title": "Weathering With You",
+    "Director": "Makoto Shinkai",
+    "Thumbnail": "weathering_with_you.jpg",
+    "Overview": "A runaway boy meets a girl who has the mysterious ability to control the weather.",
+    "Release_Date": "2019-07-19",
+    "Original_Language": "JA",
+    "Comment": 150,
+    "VoteCount": 430,
+    "VoteAverage": 8.4
+  },
+  {
+    "Title": "KonoSuba: God's Blessing on This Wonderful World!",
+    "Genre": [action._id, comedy._id, isekai._id],
+    "Director": "Takaomi Kanasaki",
+    "Thumbnail": "konosuba.jpg",
+    "Overview": "A shut-in gamer is reincarnated into a fantasy world alongside a group of hilariously dysfunctional companions.",
+    "Release_Date": "2016-01-14",
+    "Original_Language": "JA",
+    "Comment": 175,
+    "VoteCount": 480,
+    "VoteAverage": 8.6
+  },
+  {
+    "Title": "Overlord",
+    "Director": "Naoyuki Ito",
+    "Thumbnail": "overlord.jpg",
+    "Overview": "A powerful player remains trapped inside a virtual MMORPG world after the servers shut down.",
+    "Release_Date": "2015-07-07",
+    "Original_Language": "JA",
+    "Comment": 142,
+    "VoteCount": 390,
+    "VoteAverage": 8.3
+  },
+  {
+    "Title": "Trinity Seven",
+    "Genre": [action._id, harem._id],
+    "Director": "Hiroshi Nishikiori",
+    "Thumbnail": "trinity_seven.jpg",
+    "Overview": "A boy enrolls in a magical academy and teams up with seven powerful female mages to save his cousin and the world.",
+    "Release_Date": "2014-10-08",
+    "Original_Language": "JA",
+    "Comment": 98,
+    "VoteCount": 250,
+    "VoteAverage": 7.4
+  },
+  {
+    "Title": "Absolute Duo",
+    "Director": "Atsushi Nakayama",
+    "Thumbnail": "absolute_duo.jpg",
+    "Overview": "Students at a special academy manifest weapons from their souls and fight to become stronger partners.",
+    "Release_Date": "2015-01-04",
+    "Original_Language": "JA",
+    "Comment": 76,
+    "VoteCount": 180,
+    "VoteAverage": 6.9
+  },
+  {
+    "Title": "Rent-a-Girlfriend",
+    "Director": "Kazuomi Koga",
+    "Thumbnail": "rent_a_girlfriend.jpg",
+    "Overview": "After a painful breakup, a college student rents a girlfriend and becomes entangled in complicated relationships.",
+    "Release_Date": "2020-07-11",
+    "Original_Language": "JA",
+    "Comment": 135,
+    "VoteCount": 340,
+    "VoteAverage": 7.2
+  },
+  {
+    "Title": "Queen's Blade",
+    "Director": "Kinji Yoshimoto",
+    "Thumbnail": "queens_blade.jpg",
+    "Overview": "In a fantasy world, powerful female warriors compete in the Queen's Blade tournament to determine the next queen.",
+    "Release_Date": "2009-04-02",
+    "Original_Language": "JA",
+    "Comment": 65,
+    "VoteCount": 140,
+    "VoteAverage": 6.2
+  },
+  {
+    "Title": "To Love-Ru",
+    "Genre": [action._id, harem._id],
+    "Director": "Takao Kato",
+    "Thumbnail": "to_love_ru.jpg",
+    "Overview": "A shy high school boy's life turns chaotic after an alien princess suddenly appears and decides to marry him.",
+    "Release_Date": "2008-04-04",
+    "Original_Language": "JA",
+    "Comment": 110,
+    "VoteCount": 310,
+    "VoteAverage": 7.4
+  },
+  {
+    "Title": "Grand Blue",
+    "Director": "Shinji Takamatsu",
+    "Thumbnail": "grand_blue.jpg",
+    "Overview": "A college freshman joins a diving club and quickly becomes involved in hilarious and outrageous adventures with his seniors.",
+    "Release_Date": "2018-07-14",
+    "Original_Language": "JA",
+    "Comment": 180,
+    "VoteCount": 520,
+    "VoteAverage": 8.5
+  },
+  {
+    "Title": "MARRIAGETOXIN",
+    "Director": "N/A",
+    "Thumbnail": "marriagetoxin.jpg",
+    "Overview": "A skilled assassin is pressured to find a wife and starts an unusual journey filled with action, romance, and comedy.",
+    "Release_Date": "2022-04-20",
+    "Original_Language": "JA",
+    "Comment": 40,
+    "VoteCount": 95,
+    "VoteAverage": 7.8
+  },
+  {
+    "Title": "Oshi no Ko",
+    "Genre": [drama._id],
+    "Director": "Daisuke Hiramaki",
+    "Thumbnail": "oshi_no_ko.jpg",
+    "Overview": "A doctor and his patient are reincarnated into the world of the entertainment industry, uncovering dark secrets behind fame and idols.",
+    "Release_Date": "2023-04-12",
+    "Original_Language": "JP",
+    "Comment": 87,
+    "VoteCount": 190,
+    "VoteAverage": 8.7
+  },
+  {
+    "Title": "Toujima Tanzaburou wa Kamen Rider ni Naritai",
+    "Director": "Takahiro Ikezoe",
+    "Thumbnail": "toujima_tanzaburou.jpg",
+    "Overview": "A middle-aged man obsessed with Kamen Rider dreams of becoming a true hero in real life.",
+    "Release_Date": "2025-01-01",
+    "Original_Language": "JP",
+    "Comment": 45,
+    "VoteCount": 60,
+    "VoteAverage": 7.8
   }
 ]);
+
+
+
+

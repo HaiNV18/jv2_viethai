@@ -1,0 +1,14 @@
+db.genre.insertMany([
+  { name: "Action" },
+  { name: "Adventure" },
+  { name: "Drama" },
+  { name: "Fantasy" },
+  { name: "Comedy" },
+  { name: "Romance" },
+  { name: "Psychological" },
+  { name: "Thriller" },
+  { name: "Supernatural" },
+  { name: "Shounen" },
+  { name: "Sci-Fi" },
+  { name: "Sports" }
+]);

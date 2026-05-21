@@ -30,6 +30,9 @@ public class Movie {
     @Field("Thumbnail")
     private String thumbnail;
 
+    @Field("Genre")
+    private String genre;
+
     @NotBlank(message = "Overview is required")
     @Size(min = 2, max = 200, message = "Overview must be 2-200 characters")
     @Field("Overview")

@@ -47,4 +47,7 @@ public class MovieService {
                 ));
     }
 
+    public List<Movie> findTop5ByOrderByVote() {
+        return movieRepo.findTop5ByOrderByVote_averageDesc();
+    }
 }
