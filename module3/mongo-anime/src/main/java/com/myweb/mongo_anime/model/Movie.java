@@ -44,10 +44,12 @@ public class Movie {
     private String originalLanguage;
     @Field("Comment")
     private Integer comment;
+
     @Field("VoteCount")
-    private Integer vote_count;
+    private Integer voteCount;
+
     @Field("VoteAverage")
-    private Double vote_average;
+    private Double voteAverage;
 
     @Field("Create_Date")
     private String createDate;

@@ -47,7 +47,7 @@ public class MovieService {
                 ));
     }
 
-    public List<Movie> findTop5ByOrderByVote() {
-        return movieRepo.findTop5ByOrderByVote_averageDesc();
+    public List<Movie> findTop5ByOrderByVoteAverageDesc() {
+        return movieRepo.findTop5ByOrderByVoteAverageDesc();
     }
 }
