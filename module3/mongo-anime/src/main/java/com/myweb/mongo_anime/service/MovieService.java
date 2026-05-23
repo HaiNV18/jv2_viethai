@@ -60,6 +60,10 @@ public class MovieService {
         return movieRepo.findTop10ByOrderByVoteCountDesc();
     }
 
+    public List<ChartDTO> getTop7ReleaseMonths() {
+        return movieRepo.getTop7ReleaseMonths();
+    }
+
     public List<ChartDTO> getMoviesByGenre() {
         return movieRepo.getMoviesByGenre();
     }

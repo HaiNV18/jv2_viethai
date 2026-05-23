@@ -89,9 +89,17 @@
                             <canvas id="genreChart"></canvas>
                         </div>
                     </div>
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-light text-center rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <h6 class="mb-0">Top Release Month</h6>
+                                <a href="">Show All</a>
+                            </div>
+                            <canvas id="releaseMonthChart"></canvas>
+                        </div>
+                    </div>
                 </div>
             </div>
-
 
             <!-- Sales Chart Start -->
             <div class="container-fluid pt-4 px-4">
@@ -258,52 +266,35 @@
           }
         });
 
-        // Genre Chart
-        // const genres = [[${listMoviesByGenre.keySet()}]];
-        // const countGenre = [[${listMoviesByGenre.values()}]];
-        // console.log(genres)
-        // console.log(countGenre)
-        // const ctxGenre = document.getElementById('genreChart').getContext('2d');
-        // new Chart(ctxGenre, {
-        //     type: 'bar',
-        //     data: {
-        //         labels: genres,
-        //         datasets: [{
-        //             label: 'Movies by genre',
-        //             data: countGenre,
-        //             backgroundColor: 'blue'
-        //         }]
-        //     }
-        // });
+        // Release Month Chart
+        const releaseMonths = [[${releaseMonthMap.keySet()}]];
+        const releaseCounts = [[${releaseMonthMap.values()}]];
+        const releaseCtx = document.getElementById('releaseMonthChart').getContext('2d');
 
+        new Chart(releaseCtx, {
+            type: 'line',
+            data: {
+                labels: releaseMonths,
+                datasets: [{
+                    label: 'Top 7 Release Months',
+                    data: releaseCounts,
+                    borderColor: 'blue',
+                    backgroundColor: 'rgba(0, 0, 255, 0.2)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: true }
+                },
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
 
-        // Genre Chart
-        // new Chart(document.getElementById('genreChart'), {
-        //     type: 'bar',
-        //     data: {
-        //         labels: genres.map(x => x.label),
-        //         datasets: [{
-        //             label: 'Movies By Genre',
-        //             data: genres.map(x => x.value),
-        //             borderWidth: 1
-        //         }]
-        //     },
-        //
-        //     options: {
-        //         responsive: true,
-        //         plugins: {
-        //             legend: {
-        //                 display: true
-        //             }
-        //         },
-        //
-        //         scales: {
-        //             y: {
-        //                 beginAtZero: true
-        //             }
-        //         }
-        //     }
-        // });
     </script>
 
 

@@ -1,16 +1,30 @@
 db.genre.insertMany([
   { name: "Action" },
   { name: "Adventure" },
+  { name: "Comedy" },
   { name: "Drama" },
+  { name: "Ecchi" },
   { name: "Fantasy" },
   { name: "Harem" },
+  { name: "Horror" },
   { name: "Isekai" },
-  { name: "Comedy" },
+  { name: "Magic" },
+  { name: "Mecha" },
+  { name: "Mystery" },
   { name: "Romance" },
   { name: "Psychological" },
   { name: "Thriller" },
-  { name: "Supernatural" },
-  { name: "Shounen" },
+  { name: "School" },
   { name: "Sci-Fi" },
-  { name: "Sports" }
+  { name: "Shounen" },
+  { name: "Slice of Life" },
+  { name: "Sports" },
+  { name: "Supernatural" },
 ]);
+
+
+
+
+
+
+

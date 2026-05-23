@@ -1,8 +1,8 @@
 const action = db.genre.findOne({ name: "Action" });
 const adventure = db.genre.findOne({ name: "Adventure" });
+const comedy = db.genre.findOne({ name: "Comedy" });
 const drama = db.genre.findOne({ name: "Drama" });
 const fantasy = db.genre.findOne({ name: "Fantasy" });
-const comedy = db.genre.findOne({ name: "Comedy" });
 const romance = db.genre.findOne({ name: "Romance" });
 const psychological = db.genre.findOne({ name: "Psychological" });
 const thriller = db.genre.findOne({ name: "Thriller" });
@@ -17,17 +17,8 @@ const isekai = db.genre.findOne({ name: "Isekai" });
 const magic = db.genre.findOne({ name: "Magic" });
 const school = db.genre.findOne({ name: "School" });
 const ecchi = db.genre.findOne({ name: "Ecchi" });
-const music = db.genre.findOne({ name: "Music" });
-const mecha = db.genre.findOne({ name: "Mecha" });
-const seinen = db.genre.findOne({ name: "Seinen" });
-const military = db.genre.findOne({ name: "Military" });
-const historical = db.genre.findOne({ name: "Historical" });
-const samurai = db.genre.findOne({ name: "Samurai" });
-const vampire = db.genre.findOne({ name: "Vampire" });
-const martialArts = db.genre.findOne({ name: "Martial Arts" });
-const game = db.genre.findOne({ name: "Game" });
-const demons = db.genre.findOne({ name: "Demons" });
 const harem = db.genre.findOne({ name: "Harem" });
+const mecha = db.genre.findOne({ name: "Mecha" });
 
 db.movies.insertMany([
   {
@@ -44,6 +35,7 @@ db.movies.insertMany([
   },
   {
     "Title": "Death Note",
+    "Genre": [supernatural._id, school._id],
     "Director": "Tetsurou Araki",
     "Thumbnail": "death_note.jpg",
     "Overview": "A high school student discovers a supernatural notebook that grants the power to kill anyone whose name is written in it.",
@@ -55,6 +47,7 @@ db.movies.insertMany([
   },
   {
     "Title": "Naruto",
+    "Genre": [action._id, magic._id],
     "Director": "Hayato Date",
     "Thumbnail": "naruto.jpg",
     "Overview": "A young ninja seeks recognition from his peers and dreams of becoming the Hokage.",
@@ -66,6 +59,7 @@ db.movies.insertMany([
   },
   {
     "Title": "One Piece",
+    "Genre": [action._id, drama._id],
     "Director": "Konosuke Uda",
     "Thumbnail": "one_piece.jpg",
     "Overview": "Monkey D. Luffy sails with his pirate crew in search of the legendary treasure known as One Piece.",

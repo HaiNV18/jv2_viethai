@@ -15,11 +15,27 @@ public interface MovieRepository extends MongoRepository<Movie, String> {
     List<Movie> findHighlyRated(double minRating);
 
     @Aggregation(pipeline = {
-            "{ $group: { _id:  '$Genre', total:  {$sum:  1}}}",
+            "{ $project: { month: { $substr: ['$Release_Date', 0, 7] } } }",
+            "{ $group: { _id: '$month', total: { $sum: 1 } } }",
+            "{ $sort: { total: -1 } }",
+            "{ $limit: 7 }",
+            "{ $project: { label: '$_id', value: '$total', _id: 0 } }"
+    })
+    List<ChartDTO> getTop7ReleaseMonths();
+
+    @Aggregation(pipeline = {
+            "{ $unwind: '$Genre' }",
+            "{ $lookup: { from: 'genre', localField: 'Genre', foreignField: '_id', as: 'genreInfo' } }",
+            "{ $unwind: '$genreInfo' }",
+
+            "{ $group: { _id:  '$genreInfo.name', total:  {$sum:  1}}}",
             "{ $sort: { total: -1 } } ",
             "{ $project: { label: '$_id', value: '$total', _id: 0 } }"
     })
     List<ChartDTO> getMoviesByGenre();
+    // $unwind: tach cac phan tu, vi ket qua la array []
+    // $lookup: join voi collection genre. Ket qua duoc dat ten la genreInfo
+    // $group: giong GROUP BY $genreInfo.name
 
     List<Movie> findTop5ByOrderByVoteAverageDesc(); // 5 phim danh gia cao nhat
 
