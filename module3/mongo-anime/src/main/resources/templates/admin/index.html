@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <div th:replace="admin/block/header :: header"></div>
 
@@ -92,8 +92,8 @@
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-light text-center rounded p-4">
                             <div class="d-flex align-items-center justify-content-between mb-4">
-                                <h6 class="mb-0">Top Release Month</h6>
-                                <a href="">Show All</a>
+                                <h6 class="mb-0">7 months that have the largest total of movies</h6>
+                                <a th:href="@{/admin/movie/list}">Show All</a>
                             </div>
                             <canvas id="releaseMonthChart"></canvas>
                         </div>
@@ -250,14 +250,14 @@
     <script src="js/main.js"></script>
 
     <script th:inline="javascript">
-        const languages = [[${listMoviesByGenre.keySet()}]];
+        const genre = [[${listMoviesByGenre.keySet()}]];
         const counts = [[${listMoviesByGenre.values()}]];
         const ctx = document.getElementById('genreChart').getContext('2d');
 
         new Chart(ctx, {
           type: 'bar',
           data: {
-            labels: languages,
+            labels: genre,
             datasets: [{
               label: 'Movies by genre',
               data: counts,
@@ -294,7 +294,6 @@
                 }
             }
         });
-
     </script>
 
 

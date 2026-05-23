@@ -59,6 +59,14 @@ public class DashboardController {
             movieFrance = filtered.get("FR");
         }
 
+        // Get top 7 release months
+        List<ChartDTO> listMovieTop7ReleaseMonths = movieService.getTop7ReleaseMonths();
+
+        Map<String, Integer> releaseMonthMap = new LinkedHashMap<>();
+        for (ChartDTO item : listMovieTop7ReleaseMonths) {
+            releaseMonthMap.put(item.getLabel(), item.getValue());
+        }
+
         // Get movie by genres
         List<ChartDTO> listMovieGenre = movieService.getMoviesByGenre();
 
@@ -95,6 +103,7 @@ public class DashboardController {
         model.addAttribute("movieKorea", movieKorea);
         model.addAttribute("movieFrance", movieFrance);
 
+        model.addAttribute("releaseMonthMap", releaseMonthMap);
         model.addAttribute("listMoviesByGenre", listMoviesByGenre);
 
         model.addAttribute("listTopVoteAverage", listTopVoteAverage);
