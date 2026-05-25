@@ -5,6 +5,8 @@ import com.myweb.mongo_anime.dto.MovieDTO;
 import com.myweb.mongo_anime.model.Movie;
 import com.myweb.mongo_anime.service.GenreService;
 import com.myweb.mongo_anime.service.MovieService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,8 @@ public class DashboardController {
 
     @Autowired
     public GenreService genreService;
+
+    private static final Logger log = LoggerFactory.getLogger(DashboardController.class);
 
     @GetMapping(value = "/dashboard", produces = MediaType.TEXT_HTML_VALUE)
     public String showDashboard(Model model) {
