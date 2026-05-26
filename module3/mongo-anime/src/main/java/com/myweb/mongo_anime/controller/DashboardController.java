@@ -2,9 +2,12 @@ package com.myweb.mongo_anime.controller;
 
 import com.myweb.mongo_anime.dto.ChartDTO;
 import com.myweb.mongo_anime.dto.MovieDTO;
+import com.myweb.mongo_anime.model.Logging;
 import com.myweb.mongo_anime.model.Movie;
 import com.myweb.mongo_anime.service.GenreService;
+import com.myweb.mongo_anime.service.LoggerService;
 import com.myweb.mongo_anime.service.MovieService;
+import com.myweb.mongo_anime.utils.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,10 +33,18 @@ public class DashboardController {
     @Autowired
     public GenreService genreService;
 
+    @Autowired
+    public LoggerService loggerService;
+
     private static final Logger log = LoggerFactory.getLogger(DashboardController.class);
 
     @GetMapping(value = "/dashboard", produces = MediaType.TEXT_HTML_VALUE)
     public String showDashboard(Model model) {
+        log.trace("TEST TRACE");
+        log.debug("TEST DEBUG");
+        log.info("TEST INFO");
+        log.warn("TEST WARN");
+        log.error("TEST ERROR");
 
         // loc theo ngon ngu
         Map<String, Long> languageCounts = movieService.getAndGroupMoviesByLanguage();
@@ -62,9 +74,24 @@ public class DashboardController {
         if (filtered.get("FR") != null) {
             movieFrance = filtered.get("FR");
         }
+        log.error("movieEng {}", movieEng);
+        log.error("languageCounts {}", languageCounts);
+
+        System.out.println("movieEng " + movieEng);
 
         // Get top 7 release months
         List<ChartDTO> listMovieTop7ReleaseMonths = movieService.getTop7ReleaseMonths();
+
+        if (listMovieTop7ReleaseMonths.isEmpty()) {
+            log.info("listMovieTop7ReleaseMonths {}", listMovieTop7ReleaseMonths);
+
+            // Save to mongodb
+            Logging objLog = new Logging();
+            objLog.setLevel("INFO");
+            objLog.setMessage("listMovieTop7ReleaseMonths is empty");
+            objLog.setCreateDate(DateUtil.getCurrentDateTime());
+            loggerService.save(objLog);
+        }
 
         Map<String, Integer> releaseMonthMap = new LinkedHashMap<>();
         for (ChartDTO item : listMovieTop7ReleaseMonths) {

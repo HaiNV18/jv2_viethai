@@ -1,6 +1,7 @@
 package com.myweb.mongo_anime.utils;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
@@ -29,6 +30,10 @@ public class DateUtil {
     public static String formatDateToday(DateTimeFormatter outputFormat) {
         LocalDate date = LocalDate.now();
         return date.format(outputFormat);
+    }
+
+    public static String getCurrentDateTime() {
+        return LocalDateTime.now().format(FORMAT_YYYY_MM_DD_HH_MM_SS);
     }
 
     // Return: Mon Tue Wed
