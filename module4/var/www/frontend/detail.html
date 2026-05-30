@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Detail</title>
+</head>
+<body>
+
+<h1 id="title"></h1>
+
+<p>
+    <b>Director:</b>
+    <span id="director"></span>
+</p>
+
+<p>
+    <b>Release Date:</b>
+    <span id="releaseDate"></span>
+</p>
+
+<p>
+    <b>Rating:</b>
+    <span id="rating"></span>
+</p>
+
+<p id="overview"></p>
+
+<script>
+
+async function loadMovie() {
+
+    const params =
+        new URLSearchParams(window.location.search);
+
+    const id =
+        params.get("id");
+
+    const response =
+        await fetch(`/api/v1/movie/detail/${id}`);
+
+    const movie =
+        await response.json();
+
+    document.getElementById("title").innerText = movie.title;
+
+    document.getElementById("director").innerText = movie.director;
+
+    document.getElementById("releaseDate").innerText = movie.releaseDate;
+
+    document.getElementById("rating").innerText = movie.voteAverage;
+
+    document.getElementById("overview").innerText = movie.overview;
+}
+
+loadMovie();
+
+</script>
+
+</body>
+</html>
