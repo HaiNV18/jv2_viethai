@@ -1,6 +1,7 @@
 package com.micro.account_service.controller;
 
 import com.micro.account_service.dto.AccountResponse;
+import com.micro.account_service.dto.LoginRequest;
 import com.micro.account_service.model.User;
 import com.micro.account_service.service.UserService;
 import com.micro.account_service.util.JwtUtil;
@@ -11,7 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -41,14 +44,24 @@ public class AuthController {
 
     @PostMapping("/auth/login")
     @ResponseBody
-    public Map<String, String> login() {
+    public Map<String, Object> login(@RequestBody LoginRequest request) {
+
+        // Step 1: findByUsername
+        // Step 2: check password
+        // Step 3: check role List<String> roles = findByUserId
+        // Map có status, message
+
         Map<String, Object> claims = new HashMap<>();
         claims.put("user_id", "123456");
-        claims.put("email", "leo.messi@fifa.com");
+        claims.put("roles", "[ADMIN]");
 
         String token = JwtUtil.generateToken(claims);
 
-        Map<String, String> res = new HashMap<>();
+        Map<String, Object> res = new HashMap<>();
+        res.put("status", "200");
+        res.put("message", "Success");
+        res.put("username", request.getUsername());
+        res.put("roles", "[ADMIN]");
         res.put("token", token);
         return res;
     }

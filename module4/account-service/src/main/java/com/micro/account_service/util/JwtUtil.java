@@ -33,4 +33,11 @@ public class JwtUtil {
                 .getBody();
     }
 
+    public static Claims extractAllClaims(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(SECRET_KEY)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+    }
 }
