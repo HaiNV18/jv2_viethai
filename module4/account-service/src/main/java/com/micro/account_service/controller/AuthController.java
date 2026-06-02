@@ -1,21 +1,25 @@
 package com.micro.account_service.controller;
 
 import com.micro.account_service.dto.AccountResponse;
+import com.micro.account_service.model.User;
+import com.micro.account_service.service.UserService;
 import com.micro.account_service.util.JwtUtil;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1")
 public class AuthController {
+
+    @Autowired
+    public UserService userService;
 
     @GetMapping("/account/hello-world")
     public String helloWorld() {
@@ -23,17 +27,14 @@ public class AuthController {
     }
 
     @GetMapping("/account/detail/{id}")
-    public AccountResponse getAccountDetail(@PathVariable Integer id) {
-        List<String> listAccountDetail = new ArrayList<>();
-        listAccountDetail.add("Hai");
-        listAccountDetail.add("Linh");
-        listAccountDetail.add("Suong");
+    public AccountResponse getAccountDetail(@PathVariable String id) {
+        User account = userService.findById(id);
 
         AccountResponse accountResponse = new AccountResponse();
-        accountResponse.setId(id - 1);
-        accountResponse.setName(listAccountDetail.get(id - 1));
-        accountResponse.setToken("asdq34123e");
-        accountResponse.setRole(2);
+        accountResponse.setId(account.getId());
+        accountResponse.setFullname(account.getFullname());
+        accountResponse.setUsername(account.getFullname());
+        accountResponse.setEmail(account.getEmail());
 
         return accountResponse;
     }

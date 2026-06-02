@@ -8,8 +8,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AccountResponse {
-    private Integer id;
-    private String name;
+    private String id;
+    private String fullname;
+    private String username;
+    private String email;
     private String token; // xac thuc
     private Integer role; // phan quyen
 }
