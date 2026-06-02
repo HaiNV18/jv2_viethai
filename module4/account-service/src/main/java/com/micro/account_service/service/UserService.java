@@ -14,4 +14,16 @@ public class UserService {
     public User findById(String id) {
         return userRepo.findById(id).orElse(null);
     }
+
+    public User findByUsername(String username) {
+        return userRepo.findByUsername(username);
+    }
+
+    public User findByEmail(String email) {
+        return userRepo.findByEmail(email);
+    }
+
+    public User save(User user) {
+        return userRepo.save(user);
+    }
 }

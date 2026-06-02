@@ -1,22 +1,20 @@
 package com.micro.account_service.model;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Data
-@Document(collection = "user_role")
-public class UserRole {
+@Document(collection = "permission")
+public class Permission {
 
     @Id
     private String id;
 
-    @Field("user_id")
-    private String userId;
+    @Field("permission_id")
+    private String permissionId;
 
-    @Field("role_id")
-    private String roleId;
+    @Field("action")
+    private String action;
 }
