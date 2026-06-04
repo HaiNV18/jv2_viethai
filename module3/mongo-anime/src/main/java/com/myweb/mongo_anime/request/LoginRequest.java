@@ -1,4 +1,4 @@
-package com.micro.account_service.dto;
+package com.myweb.mongo_anime.request;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,6 +7,5 @@ import lombok.Setter;
 @Setter
 public class LoginRequest {
     private String username;
-    private String email;
     private String password;
 }
