@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class JwtUtil {
 
-    private static final Key SECRET_KEY = Keys.hmacShaKeyFor("VerySecretKeyVerySecretKeyVerySecretKey".getBytes());
+    private static final Key SECRET_KEY = Keys.hmacShaKeyFor("MySuperSecretKeyForJWTAuthentication2024!!!".getBytes());
     private static final long EXPIRATION_TIME = 4 * 60 * 60 * 1000; // 4h
 
     public static String generateToken(Map<String, Object> claims) {//claims chứa vài thông tin cơ bản muốn chia sẻ

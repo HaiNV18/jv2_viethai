@@ -22,6 +22,10 @@ public class MovieService {
         return movieRepo.findAll(pageable);
     }
 
+    public List<Movie> getAllMovies() {
+        return movieRepo.findAll();
+    }
+
     public Movie findById(String id) {
         return movieRepo.findById(id).orElse(null);
     }

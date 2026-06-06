@@ -1,9 +1,10 @@
 package com.myweb.mongo_anime.controller;
 
 import com.myweb.mongo_anime.dto.LoginResponse;
-import com.myweb.mongo_anime.model.Movie;
 import com.myweb.mongo_anime.request.LoginRequest;
 import com.myweb.mongo_anime.service.AuthService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -25,20 +26,24 @@ public class AuthController {
     }
 
     @PostMapping("/submit-login")
-    public String submitLogin(LoginRequest req) {
-        System.out.println(req.getUsername());
+    public String submitLogin(LoginRequest req,
+                              HttpServletResponse response) {
 
-        // Call API localhost:8081/api/v1/auth/login
         LoginResponse loginResponse = authService.login(req);
 
         if (loginResponse != null && loginResponse.getToken() != null) {
-            // Check token
 
-            // Redirect dashboard
+            Cookie cookie = new Cookie("token", loginResponse.getToken());
+
+            cookie.setHttpOnly(true);      // JS không đọc được
+            cookie.setSecure(false);       // true nếu chạy HTTPS
+            cookie.setPath("/");           // dùng cho toàn bộ website
+            cookie.setMaxAge(24 * 60 * 60); // 1 ngày
+
+            response.addCookie(cookie);
+
             return "redirect:/admin/dashboard";
         }
-
-        // Redirect Login
         return "redirect:/auth/login";
     }
 }
