@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(
-        name = "users",
+        name = "user",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "user_id"),
                 @UniqueConstraint(columnNames = "email"),
@@ -42,7 +42,7 @@ public class User {
     private String username;
 
     @NotBlank(message = "Password is required")
-    @Size(min = 2, max = 20, message = "Password must be 2-20 characters")
+    @Size(min = 2, max = 50, message = "Password must be 2-50 characters")
     @Column(name = "password", nullable = false, length = 255)
     private String password;
 }
