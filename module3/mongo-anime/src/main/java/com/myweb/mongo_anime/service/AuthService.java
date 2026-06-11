@@ -1,12 +1,10 @@
 package com.myweb.mongo_anime.service;
 
 import com.myweb.mongo_anime.dto.LoginResponse;
+import com.myweb.mongo_anime.dto.LogoutResponse;
 import com.myweb.mongo_anime.request.LoginRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -27,6 +25,25 @@ public class AuthService {
                         "http://localhost:8081/api/v1/auth/login",
                         entity,
                         LoginResponse.class
+                );
+
+        return response.getBody();
+    }
+
+    public LogoutResponse logout(String token) {
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(token);
+
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
+
+        ResponseEntity<LogoutResponse> response =
+                restTemplate.exchange(
+                        "http://localhost:8081/api/v1/auth/logout",
+                        HttpMethod.POST,
+                        entity,
+                        LogoutResponse.class
                 );
 
         return response.getBody();

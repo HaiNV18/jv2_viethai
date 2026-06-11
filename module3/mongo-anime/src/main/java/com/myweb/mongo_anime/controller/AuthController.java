@@ -1,9 +1,11 @@
 package com.myweb.mongo_anime.controller;
 
 import com.myweb.mongo_anime.dto.LoginResponse;
+import com.myweb.mongo_anime.dto.LogoutResponse;
 import com.myweb.mongo_anime.request.LoginRequest;
 import com.myweb.mongo_anime.service.AuthService;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -46,4 +48,38 @@ public class AuthController {
         }
         return "redirect:/auth/login";
     }
+
+    @GetMapping(value = "/logout", produces = MediaType.TEXT_HTML_VALUE)
+    public String logout(HttpServletRequest request,
+                         HttpServletResponse response) {
+
+        // Lấy token từ cookie
+        String token = null;
+
+        if (request.getCookies() != null) {
+            for (Cookie cookie : request.getCookies()) {
+                if ("token".equals(cookie.getName())) {
+                    token = cookie.getValue();
+                    break;
+                }
+            }
+        }
+
+        // Call API logout
+        if (token != null && !token.isBlank()) {
+            authService.logout(token);
+        }
+
+        // Xóa cookie
+        Cookie cookie = new Cookie("token", null);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(false);
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+
+        response.addCookie(cookie);
+
+        return "redirect:/auth/login";
+    }
+
 }

@@ -2,8 +2,10 @@ package com.micro.account_service.controller;
 
 import com.micro.account_service.dto.AccountResponse;
 import com.micro.account_service.dto.LoginRequest;
+import com.micro.account_service.model.JwtBlacklist;
 import com.micro.account_service.model.User;
 import com.micro.account_service.model.UserRole;
+import com.micro.account_service.repository.JwtBlacklistRepository;
 import com.micro.account_service.service.EmailService;
 import com.micro.account_service.service.RoleService;
 import com.micro.account_service.service.UserRoleService;
@@ -39,14 +41,17 @@ public class AuthController {
     @Autowired
     public RoleService roleService;
 
+    @Autowired
+    public JwtBlacklistRepository jwtBlacklistRepository;
+
     @GetMapping("/account/hello-world")
     public String helloWorld() {
-        return "Hello World account-service";
+        return "Hello World deploy render.com";
     }
 
-    @GetMapping("/account/detail/{id}")
-    public AccountResponse getAccountDetail(@PathVariable String id) {
-        User account = userService.findById(id);
+    @GetMapping("/account/detail/{username}")
+    public AccountResponse getAccountDetail(@PathVariable String username) {
+        User account = userService.findByUsername(username);
 
         AccountResponse accountResponse = new AccountResponse();
         accountResponse.setId(account.getId());
@@ -136,7 +141,37 @@ public class AuthController {
         return res;
     }
 
+    @PostMapping("/auth/logout")
+    @ResponseBody
+    public Map<String, Object> logout(HttpServletRequest request) {
 
+        Map<String, Object> response = new HashMap<>();
+
+        String authHeader = request.getHeader("Authorization");
+
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            response.put("status", HttpStatus.BAD_REQUEST.value());
+            response.put("message", "Token is missing");
+            return response;
+        }
+
+        String token = authHeader.substring(7);
+
+        // Nếu token đã nằm trong blacklist thì không cần lưu lại
+        if (!jwtBlacklistRepository.existsByToken(token)) {
+
+            JwtBlacklist blacklist = new JwtBlacklist();
+            blacklist.setToken(token);
+            blacklist.setExpiredAt(JwtUtil.getExpiration(token));
+
+            jwtBlacklistRepository.save(blacklist);
+        }
+
+        response.put("status", HttpStatus.OK.value());
+        response.put("message", "Logout success");
+
+        return response;
+    }
 
 
     @GetMapping("/booking_info")
