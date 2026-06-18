@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <!--<meta charset="utf-8">-->
+    <title>DASHMIN - Bootstrap Admin Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="/admin/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/admin/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/admin/css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="container-xxl position-relative bg-white d-flex p-0">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+    <div th:replace="admin/block/side-navbar :: sidenavbar"></div>
+
+    <!-- Content Start -->
+    <div class="content">
+        <div th:replace="admin/block/top-navbar :: topnavbar"></div>
+
+        <!-- Form Start -->
+        <div class="container-fluid pt-4 px-4">
+            <div class="row g-4">
+                <div class="col-sm-12 col-xl-12">
+                    <div class="bg-light rounded h-100 p-4">
+                        <h6 class="mb-4">Create Movie</h6>
+                        <form th:action="@{/admin/movie/insert}" method="post" th:object="${movie}" enctype="multipart/form-data">
+                            <div class="row mb-3">
+                                <label for="titleMovie" class="col-sm-2 col-form-label">Title</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="titleMovie" th:field="*{title}">
+                                    <div class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="directorMovie" class="col-sm-2 col-form-label">Director</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="directorMovie" name="director">
+                                    <div class="text-danger" th:if="${#fields.hasErrors('director')}" th:errors="*{director}"></div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="overviewMovie" class="col-sm-2 col-form-label">Overview</label>
+                                <div class="col-sm-10">
+                                    <textarea type="text" class="form-control" id="overviewMovie" name="overview"></textarea>
+                                    <div class="text-danger" th:if="${#fields.hasErrors('overview')}" th:errors="*{overview}"></div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="releaseDateMovie" class="col-sm-2 col-form-label">Release Date</label>
+                                <div class="col-sm-10">
+                                    <input type="date" class="form-control" id="releaseDateMovie" th:field="*{releaseDate}">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">Thumbnail</label>
+                                <div class="col-sm-10">
+                                    <input type="file" class="form-control" id="thumbnailMovie" name="thumbnailFile">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="languageMovie" class="col-sm-2 col-form-label">Language</label>
+                                <div class="col-sm-10">
+                                    <select id="languageMovie" name="originalLanguage">
+                                        <option value="EN">EN</option>
+                                        <option value="JP">JP</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Form End -->
+
+        <!-- Footer Start -->
+        <div class="container-fluid pt-4 px-4">
+            <div class="bg-light rounded-top p-4">
+                <div class="row">
+                    <div class="col-12 col-sm-6 text-center text-sm-start">
+                        &copy; <a href="#">Your Site Name</a>, All Right Reserved.
+                    </div>
+                    <div class="col-12 col-sm-6 text-center text-sm-end">
+                        <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                        Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+    </div>
+    <!-- Content End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+</div>
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/admin/lib/chart/chart.min.js"></script>
+<script src="/admin/lib/easing/easing.min.js"></script>
+<script src="/admin/lib/waypoints/waypoints.min.js"></script>
+<script src="/admin/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="/admin/lib/tempusdominus/js/moment.min.js"></script>
+<script src="/admin/lib/tempusdominus/js/moment-timezone.min.js"></script>
+<script src="/admin/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+<!-- Template Javascript -->
+<script src="/admin/js/main.js"></script>
+</body>
+
+</html>
