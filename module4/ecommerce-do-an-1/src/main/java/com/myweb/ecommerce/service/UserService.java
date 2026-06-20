@@ -46,7 +46,7 @@ public class UserService {
 
         ResponseEntity<LoginResponse> response =
                 restTemplate.postForEntity(
-                        "http://localhost:8081/api/v1/auth/login",
+                        "http://localhost:8080/api/v1/auth/login",
                         entity,
                         LoginResponse.class
                 );

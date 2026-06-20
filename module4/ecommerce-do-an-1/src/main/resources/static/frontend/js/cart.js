@@ -34,8 +34,9 @@ function updateCartCount() {
 
     let total = 0;
     cart.forEach(item => {
-        total = total + item.qty;
+        // total += item.qty; // số lượng
+        total += item.price * item.qty; // tổng tiền
     });
 
-    document.querySelector(".badge").innerText = total;
+    document.querySelector(".badge").innerText = "$" + total;
 }
