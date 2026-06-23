@@ -32,10 +32,11 @@ public class BillService {
                     req.getCartData(),
                     new TypeReference<List<CartItemDto>>() {}
             );
+            String billId = "20260623035521";
 
             // Save Bill
             Bill bill = new Bill();
-            bill.setBillId("20260623035520");
+            bill.setBillId(billId);
             bill.setFirstname(req.getFirstname());
             bill.setLastname(req.getLastname());
             bill.setEmail(req.getEmail());
@@ -44,35 +45,22 @@ public class BillService {
 
             Bill result = billRepository.save(bill);
 
+            List<BillProduct> billProducts = cartItems.stream()
+                    .map(item -> {
+                        Integer total = (int) (item.getPrice() * item.getQty());
+
+                        BillProduct billProduct = new BillProduct();
+                        billProduct.setBillId(billId);
+                        billProduct.setNameProduct(item.getName());
+                        billProduct.setPrice(item.getPrice());
+                        billProduct.setQty(item.getQty());
+                        billProduct.setTotal(total);
+                        billProductRepository.save(billProduct);
+                        return billProduct;
+            }).toList();
+
         } catch (Exception e) {
             throw new RuntimeException("Cannot save order", e);
         }
-
-        // Save bill
-//        Bill bill = new Bill();
-//        bill.setBillId("20260620035520");
-//        bill.setFirstname(req.getFirstname());
-//        bill.setLastname(req.getLastname());
-//        bill.setEmail(req.getEmail());
-//        bill.setPhone(req.getPhone());
-//        bill.setAddress(req.getAddress());
-//        Bill result = billRepository.save(bill);
-
-        // Save bill_product
-//        BillProduct billProduct1 = new BillProduct();
-//        billProduct1.setBillId(result.getBillId());
-//        billProduct1.setNameProduct("Iphone 15");
-//        billProduct1.setPrice(9000.0);
-//        billProduct1.setQty(1);
-//        billProduct1.setTotal(9000);
-//        billProductRepository.save(billProduct1);
-
-//        BillProduct billProduct2 = new BillProduct();
-//        billProduct2.setBillId(result.getBillId());
-//        billProduct2.setNameProduct("Samsung S24");
-//        billProduct2.setPrice(6000.0);
-//        billProduct2.setQty(1);
-//        billProduct2.setTotal(6000);
-//        billProductRepository.save(billProduct2);
     }
 }

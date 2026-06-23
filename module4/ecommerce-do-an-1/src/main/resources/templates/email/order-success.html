@@ -1,0 +1,89 @@
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Xác nhận đơn hàng</title>
+</head>
+<body style="font-family: Arial, sans-serif; background:#f5f5f5; padding:20px;">
+
+<div style="max-width:700px; margin:auto; background:white; padding:30px; border-radius:8px;">
+
+    <h2 style="color:#28a745;">
+        Đặt hàng thành công
+    </h2>
+
+    <p>Xin chào <strong th:text="${customerName}"></strong>,</p>
+
+    <p>
+        Cảm ơn bạn đã mua hàng tại cửa hàng của chúng tôi.
+        Đơn hàng của bạn đã được ghi nhận.
+    </p>
+
+    <hr>
+
+    <h3>Thông tin đơn hàng</h3>
+
+    <p>
+        <b>Mã đơn hàng:</b>
+        <span></span>
+    </p>
+
+    <p>
+        <b>Ngày đặt:</b>
+        <span></span>
+    </p>
+
+    <p>
+        <b>Địa chỉ giao hàng:</b>
+        <span></span>
+    </p>
+
+    <p>
+        <b>Số điện thoại:</b>
+        <span></span>
+    </p>
+
+    <h3>Danh sách sản phẩm</h3>
+
+    <table width="100%" cellpadding="10"
+           style="border-collapse: collapse;">
+        <thead>
+        <tr style="background:#28a745;color:white;">
+            <th>Tên sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Giá</th>
+            <th>Thành tiền</th>
+        </tr>
+        </thead>
+    </table>
+
+    <hr>
+
+    <h2 style="text-align:right;color:red;">
+        Tổng tiền:
+    </h2>
+
+    <p>
+        Trạng thái:
+        <strong style="color:#ff9800;">
+            Chờ xác nhận
+        </strong>
+    </p>
+
+    <hr>
+
+    <p>
+        Nếu có bất kỳ thắc mắc nào, vui lòng liên hệ với chúng tôi.
+    </p>
+
+    <p>
+        Trân trọng,<br>
+        <strong>Shop của bạn</strong>
+    </p>
+
+</div>
+
+</body>
+</html>
+```

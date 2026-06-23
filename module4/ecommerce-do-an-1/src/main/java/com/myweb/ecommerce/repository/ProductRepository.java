@@ -15,6 +15,10 @@ public interface ProductRepository extends MongoRepository<Product, String> {
 
     List<Product> findByBrand(String brand);
 
+    @Query("{ 'brand': ?0, 'name': { $regex: ?1, $options: 'i' } }")
+    List<Product> findByBrandAndKeyword(String brand, String keyword);
+
+    @Query("{ 'name': { $regex: ?0, $options: 'i' } }")
     List<Product> findByNameContainingIgnoreCase(String keyword);
 
     List<Product> findByPriceBetween(Double minPrice, Double maxPrice);

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -36,6 +37,29 @@ public class ProductService {
         return productRepository.findByProductId(productId)
                 .orElseThrow(() ->
                         new RuntimeException("Product not found: " + productId));
+    }
+
+    public List<Product> getProductByBrand(Integer limit, String brand) {
+        List<Product> listProduct = productRepository.findByBrand(brand);
+        if (limit > 0) {
+            List<Product> result = listProduct.stream().limit(limit).toList();
+            return result;
+        }
+        return listProduct;
+    }
+
+    public List<Product> searchProduct(Integer limit, String brand, String keyword) {
+        List<Product> listProduct = new ArrayList<>();
+        if (keyword.equalsIgnoreCase("all")) {
+            listProduct = productRepository.findByNameContainingIgnoreCase(keyword);
+        } else {
+            listProduct = productRepository.findByBrandAndKeyword(brand, keyword);
+        }
+        if (limit > 0) {
+            List<Product> result = listProduct.stream().limit(limit).toList();
+            return result;
+        }
+        return listProduct;
     }
 
     public Product createProduct(Product product) {
