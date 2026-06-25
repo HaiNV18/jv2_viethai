@@ -1,5 +1,6 @@
 package com.myweb.ecommerce.model;
 
+import com.myweb.ecommerce.enums.ProductStatus;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -35,6 +36,9 @@ public class Product {
 
     @Field("thumbnail")
     private String thumbnail;
+
+    @Field("status")
+    private ProductStatus status = ProductStatus.ACTIVE;
 
     @Field("Create_Date")
     private String createDate;

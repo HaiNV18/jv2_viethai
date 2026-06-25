@@ -17,6 +17,8 @@ public interface ProductRepository extends MongoRepository<Product, String> {
 
     List<Product> findByBrand(String brand);
 
+    Page<Product> findByStatus(Pageable pageable, String status);
+
     @Query("{ 'brand': ?0, 'name': { $regex: ?1, $options: 'i' } }")
     Page<Product> findByBrandAndKeyword(Pageable pageable, String brand, String keyword);
 

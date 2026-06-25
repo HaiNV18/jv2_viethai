@@ -1,5 +1,6 @@
 package com.myweb.ecommerce.service;
 
+import com.myweb.ecommerce.enums.ProductStatus;
 import com.myweb.ecommerce.model.Product;
 import com.myweb.ecommerce.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,6 +82,7 @@ public class ProductService {
         existing.setBrand(product.getBrand());
         existing.setPrice(product.getPrice());
         existing.setThumbnail(product.getThumbnail());
+        existing.setStatus(product.getStatus());
         existing.setUpdateDate(LocalDateTime.now().toString());
 
         return productRepository.save(existing);
@@ -93,8 +95,8 @@ public class ProductService {
         productRepository.delete(product);
     }
 
-    public List<Product> getProductsByBrand(String brand) {
-        return productRepository.findByBrand(brand);
+    public Page<Product> getProductsByStatus(Pageable pageable, int status) {
+        return productRepository.findByStatus(pageable, ProductStatus.getNameByCode(status));
     }
 
     public List<Product> getProductsByPriceRange(Double minPrice, Double maxPrice) {
