@@ -3,6 +3,8 @@ package com.myweb.ecommerce.service;
 import com.myweb.ecommerce.model.Product;
 import com.myweb.ecommerce.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -48,18 +50,12 @@ public class ProductService {
         return listProduct;
     }
 
-    public List<Product> searchProduct(Integer limit, String brand, String keyword) {
-        List<Product> listProduct = new ArrayList<>();
+    public Page<Product> searchProduct(Pageable pageable, String brand, String keyword) {
         if (keyword.equalsIgnoreCase("all")) {
-            listProduct = productRepository.findByNameContainingIgnoreCase(keyword);
+            return productRepository.findByNameContainingIgnoreCase(pageable, keyword);
         } else {
-            listProduct = productRepository.findByBrandAndKeyword(brand, keyword);
+            return productRepository.findByBrandAndKeyword(pageable, brand, keyword);
         }
-        if (limit > 0) {
-            List<Product> result = listProduct.stream().limit(limit).toList();
-            return result;
-        }
-        return listProduct;
     }
 
     public Product createProduct(Product product) {
@@ -99,10 +95,6 @@ public class ProductService {
 
     public List<Product> getProductsByBrand(String brand) {
         return productRepository.findByBrand(brand);
-    }
-
-    public List<Product> searchProducts(String keyword) {
-        return productRepository.findByNameContainingIgnoreCase(keyword);
     }
 
     public List<Product> getProductsByPriceRange(Double minPrice, Double maxPrice) {

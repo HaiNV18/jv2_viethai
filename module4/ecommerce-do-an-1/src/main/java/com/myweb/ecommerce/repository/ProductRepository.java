@@ -1,6 +1,8 @@
 package com.myweb.ecommerce.repository;
 
 import com.myweb.ecommerce.model.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -16,10 +18,10 @@ public interface ProductRepository extends MongoRepository<Product, String> {
     List<Product> findByBrand(String brand);
 
     @Query("{ 'brand': ?0, 'name': { $regex: ?1, $options: 'i' } }")
-    List<Product> findByBrandAndKeyword(String brand, String keyword);
+    Page<Product> findByBrandAndKeyword(Pageable pageable, String brand, String keyword);
 
     @Query("{ 'name': { $regex: ?0, $options: 'i' } }")
-    List<Product> findByNameContainingIgnoreCase(String keyword);
+    Page<Product> findByNameContainingIgnoreCase(Pageable pageable, String keyword);
 
     List<Product> findByPriceBetween(Double minPrice, Double maxPrice);
 
