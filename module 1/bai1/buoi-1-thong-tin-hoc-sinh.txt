@@ -1,0 +1,48 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+//        System.out.print("Xin chào");
+//        System.out.print("Java");
+//
+//        System.out.println("Dong 1");
+//        System.out.println("Dong 2");
+//        System.out.println("Click Ctrl + D để duplicate đoạn code");
+//        System.out.println("Click Ctrl + ? để ẩn đoạn code (comment)");
+
+//        String ten = "An"; // kiểu chuỗi
+//        int tuoi = 20; // kiểu số
+//        System.out.printf("Ten: %s Tuoi: %d", ten, tuoi);
+
+//        final double PI = 3.14159; // Đây là hằng (constant)
+//        System.out.println("Giá trị của số Pi là: " + PI);
+
+        Scanner sc = new Scanner(System.in); // System.in sẽ nhập dữ liệu từ bàn phím vào Scanner
+        System.out.println("Nhập tên của bạn: ");
+        String ten = sc.nextLine(); // Lấy dữ liệu từ Scanner vào biến ten
+
+        System.out.println("Nhập tuổi của bạn: ");
+        int tuoi = sc.nextInt();
+
+        System.out.println("Nhập điểm Toán: ");
+        double diemToan = sc.nextDouble();
+
+        System.out.println("Nhập điểm Văn: ");
+        double diemVan = sc.nextDouble();
+
+        System.out.println("Nhập điểm Anh: ");
+        double diemAnh = sc.nextDouble();
+
+        double kq = (diemToan + diemAnh + diemVan) / 3;
+
+        System.out.println("THÔNG TIN HỌC SINH");
+        System.out.println("Tên: " + ten);
+        System.out.println("Tuổi: " + tuoi);
+        System.out.println("Điểm toán: " + diemToan);
+        System.out.println("Điểm văn: " + diemVan);
+        System.out.println("Điểm anh: " + diemAnh);
+        System.out.println("Điểm trung bình: " + kq);
+
+        sc.close();
+    }
+}

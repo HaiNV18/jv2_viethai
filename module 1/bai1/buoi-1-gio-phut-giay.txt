@@ -1,0 +1,24 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        final int HOUR = 24;
+        final int MINUTE = 60;
+        final int SECOND = 60;
+
+        System.out.println("Nhập số ngày: ");
+        int date = sc.nextInt();
+        int gio = date * HOUR;
+        int phut = date * HOUR * MINUTE;
+        int giay = date * HOUR * MINUTE * SECOND;
+
+        System.out.println("Số gio: " + gio);
+        System.out.println("Số phút: " + phut);
+        System.out.println("Số giây: " + giay);
+
+        sc.close();
+    }
+}

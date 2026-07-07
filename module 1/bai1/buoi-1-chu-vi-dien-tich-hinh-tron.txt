@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        final Double PI = 3.14159;
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Nhập bán kính: ");
+
+        Double r = sc.nextDouble();
+        Double d = r * 2;
+        Double chuvi = d * PI;
+        Double dientich = r * r * PI;
+
+        System.out.println("Đường kính: " + d);
+        System.out.println("Chu vi: " + chuvi);
+        System.out.println("Diện tích: " + dientich);
+
+
+        sc.close();
+    }
+}
