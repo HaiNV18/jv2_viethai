@@ -1,0 +1,33 @@
+
+public class Main {
+    public static void main(String[] args) {
+
+        char ch = 'a';
+        char upper = 'B';
+        char digit = '5';
+        char symbol = '@';
+        char china = '一';
+        char japan = 'る';
+
+
+        System.out.println("Character: " + ch);
+        System.out.println("Digit: " + digit);
+        System.out.println("Symbol: " + symbol);
+
+        System.out.println((int) japan);
+        System.out.println((char) 66);
+
+        System.out.println("Digit có phải số không?");
+        System.out.println(Character.isDigit(digit));
+
+        System.out.println("china có phải ký tự không?");
+        System.out.println(Character.isLetter(china));
+
+        System.out.println("Chuyển thành chữ in thường");
+        System.out.println(Character.toLowerCase(upper));
+
+        System.out.println("Chuyển thành chữ in hoa");
+        System.out.println(Character.toUpperCase(ch));
+
+    }
+}

@@ -1,0 +1,21 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Nhap chieu cao: ");
+        double height = sc.nextDouble();
+        System.out.println("Nhap can nang: ");
+        double weight = sc.nextDouble();
+
+        double bmi = tinhBMI(height,weight);
+        System.out.println("Chi so BMI: " + bmi);
+
+        sc.close();
+    }
+
+    private static double tinhBMI(double height, double weight) {
+        return weight / (height * height);
+    }
+}

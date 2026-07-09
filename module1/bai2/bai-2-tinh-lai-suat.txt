@@ -1,0 +1,30 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Nhap lai suat: ");
+        double laisuat = sc.nextDouble();
+        System.out.println("Nhap tien gui: ");
+        double money = sc.nextDouble();
+        System.out.println("Nhap thang: ");
+        double month = sc.nextDouble();
+
+        double tienlai = tinhLai(laisuat,money,month);
+        double tongtien = money + tienlai;
+
+        java.text.DecimalFormat df = new java.text.DecimalFormat("#,###.00");
+        String formattedTienLai = df.format(tienlai);
+        String formattedTongTien = df.format(tongtien);
+
+        System.out.println("Tien lai: " + formattedTienLai);
+        System.out.println("Tong tien: " + formattedTongTien);
+
+        sc.close();
+    }
+
+    private static double tinhLai(double laisuat, double money, double month) {
+        return (money * month) * (laisuat / 100 /12);
+    }
+}

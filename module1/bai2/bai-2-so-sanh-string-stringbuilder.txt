@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) throws InterruptedException {
+
+        long startTime = System.currentTimeMillis();
+
+        // Đoạn code cần kiểm tra thời gian xử lý
+        Thread.sleep(1000); // Giả lập xử lý mất 1 giây
+
+        long endTime = System.currentTimeMillis();
+        System.out.println("Thời gian xử lý: " + (endTime - startTime) + " ms");
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nguyễn Hà Duy, giáo viên trường THPT chuyên Tuyên Quang, bị cáo buộc");
+        sb.append(" đã vào phòng thi trực tiếp hướng dẫn");
+        sb.append(" và nhắc bài thi cho một số thí sinh môn Toán.");
+        System.out.println(sb.toString());
+
+//        String chuoi = "Nguyễn Hà Duy, giáo viên trường THPT chuyên Tuyên Quang, bị cáo buộc"
+//            + "đã vào phòng thi trực tiếp hướng dẫn"
+//            + "và nhắc bài thi cho một số thí sinh môn Toán.";
+//        System.out.println(chuoi);
+
+
+
+    }
+}

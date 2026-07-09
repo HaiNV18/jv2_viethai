@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+public class Main {
+    static Scanner sc = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        System.out.println("Tính tổng a và b: ");
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+
+        int tong = tinhTong(a,b);
+        int hieu = tinhHieu(a,b);
+        int tich = tinhTich(a,b);
+        double thuong = tinhThuong(a,b);
+
+        khongtraveketqua(a,b);
+        System.out.println("Tong: " + tong);
+        System.out.println("Hieu: " + hieu);
+        System.out.println("Tich: " + tich);
+        System.out.println("Thuong: " + thuong);
+
+        sc.close();
+    }
+
+    private static int tinhTong(int thamSoA, int thamSoB) {
+        return thamSoA + thamSoB;
+    }
+
+    private static int tinhHieu(int thamSoA, int thamSoB) {
+        return thamSoA - thamSoB;
+    }
+
+    private static int tinhTich(int thamSoA, int thamSoB) {
+        return thamSoA * thamSoB;
+    }
+
+    private static double tinhThuong(int thamSoA, int thamSoB) {
+        return (double) thamSoA / thamSoB;
+    }
+
+    private static void khongtraveketqua(int thamSoA, int thamSoB) {
+        System.out.println("thamSoA: " + thamSoA);
+        System.out.println("thamSoB: " + thamSoB);
+    }
+}
