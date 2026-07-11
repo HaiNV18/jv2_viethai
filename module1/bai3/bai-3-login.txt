@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Nhap username: ");
+        String username = sc.nextLine();
+        System.out.println("Nhap password: ");
+        String password = sc.nextLine();
+
+        if (username.equals("admin") && password.equals("abc123")) {
+            System.out.println("Login success!");
+        } else {
+            System.out.println("Login failed!");
+
+            String wrongUsername = (username.equals("admin")) ? "" : "Wrong username";
+            System.out.println(wrongUsername);
+
+            String wrongPassword = (username.equals("abc123")) ? "" : "Wrong password";
+            System.out.println(wrongPassword);
+        }
+        sc.close();
+    }
+}

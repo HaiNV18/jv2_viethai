@@ -53,4 +53,11 @@ public class ApiController {
 
         return new ResponseEntity<>(listProducts, HttpStatus.OK);
     }
+
+    @PostMapping("/product/create")
+    public ResponseEntity getDetailProducts(@RequestMapping Integer id){
+        List<ProductDto> listProducts = new ArrayList<>();
+
+        return new ResponseEntity<>(listProducts, HttpStatus.OK);
+    }
 }

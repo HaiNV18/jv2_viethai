@@ -1,0 +1,26 @@
+import  java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Nhap số tiền: ");
+        int money = sc.nextInt();
+
+        int chia500sodu = money % 500000;
+        int soluong500 = money / 500000;
+        int chia200sodu = chia500sodu % 200000;
+        int soluong200 = chia500sodu / 200000;
+        int chia100sodu = chia200sodu % 100000;
+        int soluong100 = chia200sodu / 100000;
+        int chia50sodu = chia100sodu % 50000;
+        int soluong50 = chia50sodu / 50000;
+
+        System.out.println("So to 500: " + soluong500);
+        System.out.println("So to 200: " +soluong200);
+        System.out.println("So to 100: " +soluong100);
+        System.out.println("So to 50: " +soluong50);
+
+        sc.close();
+    }
+}

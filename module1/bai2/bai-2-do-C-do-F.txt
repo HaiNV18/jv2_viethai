@@ -1,0 +1,4 @@
+System.out.println("Nhap so do C: ");
+double C = sc.nextDouble();
+double F = C * 1.8 + 32;
+System.out.println("So do F: " + F);

@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static double USD_RATE = 0.00003807;
+    public static double JPY_RATE = 0.006156;
+    public static double KRW_RATE = 0.05706;
+    public static double CNY_RATE = 0.0002579;
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Nhap so tien VND: ");
+        double vnd = sc.nextInt();
+
+        double usd = vnd * USD_RATE;
+        double jpy = vnd * JPY_RATE;
+        double krw = vnd * KRW_RATE;
+        double cny = vnd * CNY_RATE;
+
+        System.out.println("Doi tien USD: " + usd);
+        System.out.println("Doi tien JPY: " + jpy);
+        System.out.println("Doi tien KRW: " + krw);
+        System.out.println("Doi tien CNY: " + cny);
+
+        sc.close();
+    }
+}

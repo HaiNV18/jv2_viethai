@@ -1,0 +1,9 @@
+import java.time.LocalDate;
+import java.util.Scanner;
+
+System.out.println("Nhap năm sinh: ");
+int birthdayYear = sc.nextInt();
+int currentYear = LocalDate.now().getYear();
+int age = currentYear - birthdayYear;
+
+System.out.println("Tuoi cua ban: " + age);

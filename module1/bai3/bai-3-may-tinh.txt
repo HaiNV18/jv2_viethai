@@ -1,0 +1,59 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Nhap so a: ");
+        int a = sc.nextInt();
+        System.out.println("Nhap so b: ");
+        int b = sc.nextInt();
+
+        System.out.println("So a " + kiemtrasoam(a));
+        System.out.println("So b " + kiemtrasoam(b));
+
+        int tong = tinhTong(a,b);
+        int hieu = tinhHieu(a,b);
+        int tich = tinhTich(a,b);
+
+        System.out.println("Tong: " + tong);
+        System.out.println("Hieu: " + hieu);
+        System.out.println("Tich: " + tich);
+
+        if (b != 0) {
+            double thuong = tinhThuong(a,b);
+            System.out.println("Thuong: " + thuong);
+        } else {
+            System.out.println("Khong the chia cho 0");
+        }
+
+        sc.close();
+    }
+
+    public static String kiemtrasoam(int c) {
+        if (c > 0) {
+            return "la so duong";
+        } else if (c < 0) {
+            return "la so am";
+        } else {
+            return "bang 0";
+        }
+    }
+
+    public static int tinhTong(int a, int b) {
+        return a + b;
+    }
+
+    public static int tinhHieu(int a, int b) {
+        return a - b;
+    }
+
+    public static int tinhTich(int a, int b) {
+        return a * b;
+    }
+
+    public static double tinhThuong(int a, int b) {
+        return a / b;
+    }
+}
