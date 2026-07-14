@@ -1,0 +1,21 @@
+while (true) {
+            System.out.println("Nhập language (gõ EXIT để thoát)");
+            String language = sc.nextLine();
+            if (language.equalsIgnoreCase("EXIT")) {
+                break;
+            }
+            String result = "";
+
+            switch (language) {
+                case "en", "EN":
+                    result = "English";
+                    break;
+                case "jp", "JP":
+                    result = "Japan";
+                    break;
+                default:
+                    result = "Vietnam";
+            }
+
+            System.out.println("Ngôn ngữ: " + result);
+        }

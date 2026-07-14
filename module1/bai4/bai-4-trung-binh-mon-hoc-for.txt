@@ -1,0 +1,20 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Nhập số môn học");
+        int monhoc = sc.nextInt();
+        float sum = 0;
+
+        for (int i = 1; i <= monhoc; i++) {
+            System.out.println("Nhap diem mon hoc " + i);
+            float diemmonhoc = sc.nextFloat();
+            sum = sum + diemmonhoc;
+        }
+
+        System.out.println("Diem trung binh: " + sum/monhoc);
+        sc.close();
+    }
+}

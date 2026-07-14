@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        boolean isOnRepeat = true;
+        int music = 1;
+
+        do {
+            System.out.println("Music is playing. Song " + music);
+            System.out.println("Would you like to take this song off of repeat? If so, type 'yes': ");
+            String userInput = sc.nextLine();
+            if (userInput.equalsIgnoreCase("yes")) {
+                isOnRepeat = false;
+            }
+            music = music + 1;
+        } while (isOnRepeat);
+
+        System.out.println("Music is stop");
+        sc.close();
+    }
+}
