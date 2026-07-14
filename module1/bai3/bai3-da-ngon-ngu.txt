@@ -1,0 +1,39 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Chọn ngôn ngữ: ");
+        String language = sc.nextLine();
+        String result = null;
+//        language = language.toLowerCase(); // chuyển thành viết thường
+        language = language.toUpperCase(); // chuyển thành viết hoa
+
+        switch (language) {
+            case "en", "EN":
+                result = "English";
+                break;
+            case "jp", "JP":
+                result = "Japan";
+                break;
+            case "kr", "KR":
+                result = "Korea";
+                break;
+            case "cn", "CN":
+                result = "China";
+                break;
+            case "fr", "FR":
+                result = "France";
+                break;
+            case "ru", "RU":
+                result = "Russia";
+                break;
+            default:
+                result = "Vietnam";
+        }
+
+        System.out.println("Ngôn ngữ: " + result);
+        sc.close();
+    }
+}
