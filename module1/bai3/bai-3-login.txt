@@ -15,10 +15,10 @@ public class Main {
         } else {
             System.out.println("Login failed!");
 
-            String wrongUsername = (username.equals("admin")) ? "" : "Wrong username";
+            String wrongUsername = (username.equals("admin")) ? "" : "Wrong username!";
             System.out.println(wrongUsername);
 
-            String wrongPassword = (username.equals("abc123")) ? "" : "Wrong password";
+            String wrongPassword = (username.equals("abc123")) ? "" : "Wrong password!";
             System.out.println(wrongPassword);
         }
         sc.close();
