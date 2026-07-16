@@ -1,0 +1,42 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Nhap số điện thoại: ");
+        String phone = sc.nextLine();
+
+        boolean pass = isValid(phone);
+        if (pass) {
+            String result = phone.substring(0,3) + "-" + phone.substring(3,6) + "-" + phone.substring(6,10);
+            System.out.println(result);
+        }
+
+        sc.close();
+    }
+
+    public static boolean isValid(String phone) {
+        int length = phone.length();
+        if (length != 10) {
+            System.out.println("Số điện thoại phai co 10 so");
+            return false;
+        }
+
+        if (phone.charAt(0) != '0') {
+            System.out.println("So dau tien la so 0");
+            return false;
+        }
+
+        for (int i = 0; i < length; i++) {
+            Character ch = phone.charAt(i);
+            if (!Character.isDigit(ch)) {
+                System.out.println("Khong duoc nhap ky tu");
+                return false;
+            }
+        }
+
+
+        return true;
+    }
+}

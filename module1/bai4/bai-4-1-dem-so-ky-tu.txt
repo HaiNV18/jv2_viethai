@@ -1,0 +1,37 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Nhap chuoi: ");
+        String text = sc.nextLine();
+        int length = text.length();
+
+        int number = 0;
+        int letter = 0;
+        int whitespace = 0;
+        int specialChar = 0;
+
+        for (int i = 0; i < length; i++) {
+            Character ch = text.charAt(i);
+
+            if (Character.isDigit(ch)) {
+                number += 1;
+            } else  if (Character.isLetter(ch)) {
+                letter += 1;
+            } else if (Character.isWhitespace(ch)) {
+                whitespace += 1;
+            } else if (!Character.isLetterOrDigit(ch) && !Character.isWhitespace(ch)) {
+                specialChar += 1;
+            }
+        }
+
+        System.out.println("Chu so: " + number);
+        System.out.println("Ky tu: " + letter);
+        System.out.println("Khoang trang: " + whitespace);
+        System.out.println("Ky tu dac biet: " + specialChar);
+
+        sc.close();
+    }
+}
