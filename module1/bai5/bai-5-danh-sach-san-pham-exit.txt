@@ -1,0 +1,49 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        List<String> listBrand = new ArrayList<>();
+        listBrand.add("Apple");
+        listBrand.add("Samsung");
+        listBrand.add("OPPO");
+        listBrand.add("Xiaomi");
+
+        // Sort
+        Collections.sort(listBrand);
+        System.out.println(listBrand.get(0));
+        System.out.println(listBrand.get(1));
+        System.out.println(listBrand.get(2));
+        System.out.println(listBrand.get(3));
+
+        // Size of list
+        System.out.println(listBrand.size());
+
+        // Check exist
+        System.out.println(listBrand.contains("Apple"));
+        System.out.println(listBrand.contains("Honor"));
+
+        boolean isWork = true;
+        while(isWork) {
+            System.out.println("Nhập tên hãng: ");
+            String brand = sc.nextLine();
+            if (!brand.isEmpty()) {
+                listBrand.add(brand);
+            }
+
+            System.out.println("Bạn có muốn thoát không?");
+            String exit = sc.nextLine();
+            if (exit.equalsIgnoreCase("exit")) {
+                isWork = false;
+            }
+        }
+
+        for (String item : listBrand) {
+            System.out.print(item + ", ");
+        }
+        sc.close();
+    }
+}

@@ -1,0 +1,60 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Nhập số n: ");
+        int n = sc.nextInt();
+
+        int[] a = new int[n];
+        int[] b = new int[n];
+
+        int indexSoChan = 0;
+        int indexSoLe = 0;
+        int sumSoChan = 0;
+        int sumSoLe = 0;
+        for (int i = 1; i <= n; i++) {
+
+            if (i % 2 == 0) {
+                a[indexSoChan] = i;
+                indexSoChan++;
+                sumSoChan += i;
+            } else {
+                b[indexSoLe] = i;
+                indexSoLe++;
+                sumSoLe += i;
+            }
+
+        }
+
+        // Convert to new array
+        int[] mangsochan = new int[indexSoChan];
+        int[] mangsole = new int[indexSoLe];
+
+        for (int i = 0; i < indexSoChan; i++) {
+            if (a[i] > 0) {
+                mangsochan[i] = a[i];
+            }
+        }
+        for (int i = 0; i < indexSoLe; i++) {
+            if (b[i] > 0) {
+                mangsole[i] = b[i];
+            }
+        }
+
+
+
+        // Test
+        for (int item : mangsochan) {
+            System.out.print(item + ", ");
+        }
+        System.out.println();
+        for (int item : mangsole) {
+            System.out.print(item + ", ");
+        }
+        System.out.println();
+        System.out.println("Tong so chan: " + sumSoChan);
+        System.out.println("Tong so le: " + sumSoLe);
+    }
+}

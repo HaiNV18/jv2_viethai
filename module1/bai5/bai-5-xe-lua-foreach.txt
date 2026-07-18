@@ -1,0 +1,32 @@
+import java.util.Arrays;
+
+public class Main {
+    public static void main(String[] args) {
+
+        String[] train = {"Đầu máy", "Toa 1", "Toa 2", "Toa 3", "Toa 4"};
+        String[] train2 = {"Đầu máy", "Toa 1", "Toa 2", "Toa 3", null};
+        System.out.println("Có " + train.length + " phần tử trong mảng cũ");
+
+        // Create new array
+        String newValue = "Toa 5";
+        String[] newTrain = new String[train.length + 1];
+        // Lặp theo độ dài mảng cũ
+        for (int idx=0; idx < train.length; idx++) {
+            newTrain[idx] = train[idx];
+        }
+        newTrain[5] = newValue;
+
+        // Compare array
+        System.out.println(Arrays.equals(train, train2));
+
+        // Test
+        // Lặp theo độ dài mảng mới
+        int index = 0;
+        for (String toa : newTrain) {
+            System.out.println(index);
+            System.out.println(toa);
+            index++;
+        }
+
+    }
+}

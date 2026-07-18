@@ -1,0 +1,18 @@
+
+public class Main {
+    public static void main(String[] args) {
+
+        int[] score = {8,9,10,5,8};
+        int sum = 0;
+
+        for (int item : score) {
+            System.out.println(item);
+            sum += item;
+        }
+        double average = sum / score.length;
+
+        System.out.println("Tổng điểm: " + sum);
+        System.out.println("Điểm trung bình: " + average);
+
+    }
+}
