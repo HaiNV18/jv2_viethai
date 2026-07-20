@@ -1,12 +1,12 @@
 package com.myweb.basic.controller;
 
 import com.myweb.basic.dto.ProductDto;
+import com.myweb.basic.dto.ProductRequest;
+import com.myweb.basic.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +14,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1")
 public class ApiController {
+
+    @Autowired
+    public ProductService productService;
 
     @GetMapping("/hello-world")
     public ResponseEntity helloWorld() {
@@ -33,17 +36,7 @@ public class ApiController {
 
     @GetMapping("/product/{id}")
     public ResponseEntity getDetailProducts(@PathVariable Integer id){
-        List<ProductDto> listProducts = new ArrayList<>();
-
-        ProductDto productApple = new ProductDto();
-        productApple.setId(1L);
-        productApple.setName("Apple");
-        listProducts.add(productApple);
-
-        ProductDto productSamsung = new ProductDto();
-        productSamsung.setId(2L);
-        productSamsung.setName("Samsung");
-        listProducts.add(productSamsung);
+        List<ProductDto> listProducts = productService.getListProduct();
 
         for (ProductDto product : listProducts) {
             if (product.getId().equals(Long.valueOf(id))) {
@@ -55,9 +48,40 @@ public class ApiController {
     }
 
     @PostMapping("/product/create")
-    public ResponseEntity getDetailProducts(@RequestMapping Integer id){
-        List<ProductDto> listProducts = new ArrayList<>();
+    public ResponseEntity createProducts(@RequestBody ProductRequest req){
+        ProductDto dto = new ProductDto();
+        dto.setId(3L);
+        dto.setName(req.getName());
+
+        List<ProductDto> listProducts = productService.getListProduct();
+        listProducts.add(dto);
 
         return new ResponseEntity<>(listProducts, HttpStatus.OK);
+    }
+
+    @PutMapping("/product/update")
+    public ResponseEntity updateProducts(@RequestBody ProductRequest req){
+        ProductDto dto = new ProductDto();
+        List<ProductDto> listProducts = productService.getListProduct();
+
+        listProducts.forEach(product -> {
+            if (req.getId() == product.getId()) {
+                dto.setId(req.getId());
+                dto.setName(req.getName());
+            }
+        });
+
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/product/delete")
+    public ResponseEntity updateProducts(@RequestParam Long id){
+        List<ProductDto> listProducts = productService.getListProduct();
+
+        List<ProductDto> result = listProducts.stream()
+                .filter(product -> product.getId() != id)
+                .toList();
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }
