@@ -1,0 +1,72 @@
+public class Animal {
+    protected int legs;      // số chân
+    protected boolean fly;   // có thể bay hay không
+
+    public Animal(int legs, boolean fly) {
+        System.out.println("Animal constructor");
+        this.legs = legs;
+        this.fly = fly;
+    }
+
+    protected void showInfo() {
+        System.out.println("Số chân: " + legs);
+        System.out.println("Có thể bay: " + fly);
+    }
+
+    protected void bark() {
+        System.out.println("Tieng keu");
+    }
+}
+
+=====================================================
+
+public class Dog extends Animal {
+
+    public Dog() {
+        super(4, false); // 4 chan, khong biet bay
+        System.out.println("Khoi tao Dog");
+    }
+
+    public void bark() {
+        System.out.println("Gâu gâu!");
+    }
+}
+
+=====================================================
+
+public class Bird extends Animal implements Flyable {
+
+    public Bird() {
+        super(2, true);
+        System.out.println("Khoi tao Bird");
+    }
+
+    @Override
+    public void fly() {
+        System.out.println("Flapping wings");
+    }
+
+    public void bark() {
+        System.out.println("Chirp chirp");
+    }
+}
+
+=====================================================
+
+public interface Flyable {
+    void fly();
+}
+
+=====================================================
+
+public static void main(String[] args) {
+	Dog dog = new Dog();
+	dog.showInfo(); // hàm của Animal
+	dog.bark(); // hàm của Dog ghi de len Animal
+
+	Bird bird = new Bird();
+	bird.showInfo(); // hàm của Animal
+	bird.fly(); // hàm của Bird
+	bird.bark(); // hàm của Bird ghi de len Animal
+}
+

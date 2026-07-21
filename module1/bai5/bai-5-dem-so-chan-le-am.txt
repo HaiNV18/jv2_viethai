@@ -1,0 +1,42 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Nhap n so luong phan tu:");
+        int n = sc.nextInt();
+
+        int countOdd = 0; // so le
+        int countEven = 0; // so chan
+        int countNegative = 0; // so am
+
+        int[] list = new int[n];
+        for (int i = 0; i < n; i++) {
+            list[i] = randomNumber();
+            System.out.print(list[i] + ", ");
+
+            if (list[i] % 2 == 0) {
+                countEven++;
+            } else {
+                countOdd++;
+            }
+
+            if (list[i] < 0) countNegative++;
+        }
+
+        System.out.println();
+        System.out.println("So le: " + countOdd);
+        System.out.println("So chan: " + countEven);
+        System.out.println("So am: " + countNegative);
+
+        sc.close();
+    }
+
+    public static int randomNumber() {
+        Random random = new Random();
+        return random.nextInt(41) - 20;
+    }
+
+}

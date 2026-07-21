@@ -1,0 +1,55 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int i = 1;
+        String next = "yes";
+        List<Student> listStudent = new ArrayList<>();
+
+        while(next.equals("yes")) {
+            System.out.println("Nhap thong tin hoc sinh " + i + ": ");
+            String name = sc.nextLine();
+            Integer age = sc.nextInt();
+            sc.nextLine();
+            String classroom = sc.nextLine();
+
+            Student hocsinh = new Student();
+            hocsinh.setName(name);
+            hocsinh.setAge(age);
+            hocsinh.setClassroom(classroom);
+
+            listStudent.add(hocsinh);
+
+            System.out.println("Ban muon tiep tuc khong?");
+            next = sc.nextLine();
+
+            i++;
+        }
+
+        int j = 1;
+        for(Student std : listStudent) {
+            System.out.println("Thong tin hoc sinh " + j + ": ");
+            System.out.println("Ten: " + std.getName());
+            System.out.println("Tuoi: " + std.getAge());
+            System.out.println("Lop: " + std.getClassroom());
+            j++;
+        };
+
+        sc.close();
+    }
+}
+
+// Tạo file Student.java
+public class Student {
+    public String name;
+    public Integer age;
+    public String classroom;
+
+    // Getter Setter
+}
+
