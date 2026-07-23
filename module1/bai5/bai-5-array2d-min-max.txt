@@ -1,0 +1,50 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Nhap X:");
+        int x = sc.nextInt();
+        System.out.println("Nhap Y:");
+        int y = sc.nextInt();
+
+        int min = 0;
+        int minX = 0;
+        int minY = 0;
+        int max = 0;
+        int maxX = 0;
+        int maxY = 0;
+
+        for (int i = 0; i < x; i++) {
+
+            for (int j = 0; j < y; j++) {
+                int randomNo = randomNumber();
+                System.out.print(randomNo + " ");
+
+                if (randomNo < min) {
+                    min = randomNo;
+                    minX = i;
+                    minY = j;
+                } else if (randomNo > max) {
+                    max = randomNo;
+                    maxX = i;
+                    maxY = j;
+                }
+            }
+            System.out.println();
+        }
+
+        System.out.println("So nho nhat " + min + " o vi tri " + minX + "," + minY);
+        System.out.println("So lon nhat: " + max + " o vi tri " + maxX + "," + maxY);
+
+        sc.close();
+    }
+
+    public static int randomNumber() {
+        Random random = new Random();
+        return random.nextInt(41) - 20;
+    }
+
+}
