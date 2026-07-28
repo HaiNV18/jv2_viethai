@@ -17,9 +17,8 @@ public class Animal {
         System.out.println("Tieng keu");
     }
 }
-// Đây là branch task2
-// Đây là branch task2
-// Đây là branch task2
+
+// Đây là branch task1
 =====================================================
 
 public class Dog extends Animal {
