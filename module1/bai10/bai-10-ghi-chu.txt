@@ -1,0 +1,113 @@
+import util.DateUtil;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        Scanner sc = new Scanner(System.in);
+
+        try {
+
+            System.out.println("Nhập họ tên");
+            String hoten = sc.nextLine();
+            System.out.println("Nhập chủ đề");
+            String chude = sc.nextLine();
+            System.out.println("Nhập nội dung");
+            String noidung = sc.nextLine();
+            System.out.println("Nhập ngày");
+            String ngay = sc.nextLine();
+
+            boolean isValid = false;
+            isValid = DateUtil.format(ngay);
+
+            if (!isValid) {
+                System.out.println("Ngày không hợp lệ");
+            } else {
+                ArrayList<GhiChu> listGC = new ArrayList<>();
+                GhiChu gc1 = new GhiChu(hoten, chude, noidung, DateUtil.converStringToLocalDate(ngay));
+                listGC.add(gc1);
+
+                ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("ghichu.dat"));
+                oos.writeObject(listGC);
+                oos.close();
+                System.out.println("Đã ghi danh sách sinh viên vào file .dat");
+
+                // Đọc file (object)
+                ObjectInputStream ois = new ObjectInputStream(new FileInputStream("ghichu.dat"));
+                ArrayList<GhiChu> dsGC = (ArrayList<GhiChu>) ois.readObject();
+                ois.close();
+
+                System.out.println("Họ tên\t\t\t| Chủ đề\t\t\t| Nội dung\t\t\t| Ngày thực hiện");
+                for (GhiChu gc : dsGC) {
+                    System.out.println(gc);
+                }
+
+                System.out.println("Đã đọc danh sách sinh viên từ file:");
+            }
+            sc.close();
+
+        } catch (IOException e) {
+            System.out.println("Lỗi khi ghi file: " + e.getMessage());
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+}
+
+==============
+import java.io.Serializable;
+import java.time.LocalDate;
+
+public class GhiChu implements Serializable {
+    private String hoten;
+    private String chude;
+    private String noidung;
+    private LocalDate ngay;
+
+    public GhiChu(String hoten, String chude, String noidung, LocalDate ngay) {
+        this.hoten = hoten;
+        this.chude = chude;
+        this.noidung = noidung;
+        this.ngay = ngay;
+    }
+
+    @Override
+    public String toString() {
+        return hoten + "\t\t\t|  " + chude + "\t\t\t|  " + noidung + "\t\t\t|  ";
+    }
+}
+
+==============
+package util;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+public class DateUtil {
+
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+    /**
+     * Kiểm tra ngày nhập vào có lớn hơn ngày hiện tại hay không.
+     *
+     * @param dateStr định dạng dd/MM/yyyy
+     * @return true nếu ngày > LocalDate.now(), ngược lại false
+     */
+    public static boolean format(String dateStr) {
+        try {
+            LocalDate inputDate = LocalDate.parse(dateStr, FORMATTER);
+            return inputDate.isAfter(LocalDate.now());
+        } catch (DateTimeParseException e) {
+            return false; // Sai định dạng hoặc ngày không hợp lệ
+        }
+    }
+
+    public static LocalDate converStringToLocalDate(String dateStr) {
+        return LocalDate.parse(dateStr, FORMATTER);
+    }
+}

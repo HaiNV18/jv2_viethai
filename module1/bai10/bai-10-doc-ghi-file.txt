@@ -1,0 +1,93 @@
+import java.io.*;
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+
+        try {
+            // Ghi file
+            FileWriter fw = new FileWriter("thongtin.txt");
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            bw.write("Nguyễn Văn A, 20 tuổi");
+            bw.newLine();
+            bw.write("Trần Thị B, 21 tuổi");
+            bw.close();
+
+            System.out.println("Ghi file thành công!");
+
+            // Đọc file
+            FileReader fr = new FileReader("thongtin.txt");
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+
+            // Mỗi lần lặp -> đọc file -> gán giá trị của dòng vào biến line
+            // Nếu dòng đó != null
+            while ((line = br.readLine()) != null) {
+                System.out.println(">>" + line);
+            }
+            br.close();
+
+            // Ghi file (object)
+            ArrayList<HocVien> listHV = new ArrayList<>();
+
+            HocVien hv1 = new HocVien("HV01", "Nguyễn Văn A", "Lập trình Java", 8.5);
+            listHV.add(hv1);
+//            listHV.add(new HocVien("HV01", "Nguyễn Văn A", "Lập trình Java", 8.5));
+
+            HocVien hv2 = new HocVien("HV02", "Trần Thị B", "Lập trình Python", 9.0);
+            listHV.add(hv2);
+
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("hocvien.csv"));
+            oos.writeObject(listHV);
+            oos.close();
+            System.out.println("Đã ghi danh sách sinh viên vào file .dat");
+
+            // Đọc file (object)
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("hocvien.dat"));
+            ArrayList<HocVien> dsHV = (ArrayList<HocVien>) ois.readObject();
+            ois.close();
+
+            System.out.println("Đã đọc danh sách sinh viên từ file:");
+            for (HocVien hv : dsHV) {
+                System.out.println(hv);
+            }
+
+        } catch (IOException e) {
+            System.out.println("Lỗi khi ghi file: " + e.getMessage());
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+}
+
+
+
+
+================
+import java.io.Serializable;
+
+public class HocVien implements Serializable {
+    private String maHV;
+    private String tenHV;
+    private String monHoc;
+    private double diem;
+
+    public HocVien(String maHV, String tenHV, String monHoc, double diem) {
+        this.maHV = maHV;
+        this.tenHV = tenHV;
+        this.monHoc = monHoc;
+        this.diem = diem;
+    }
+
+    public double getDiem() {
+        return diem;
+    }
+
+    @Override
+    public String toString() {
+        return "Mã HV: " + maHV + ",\t Tên: " + tenHV + ",\t Môn: " + monHoc + ",\t Điểm: " + diem;
+    }
+}
