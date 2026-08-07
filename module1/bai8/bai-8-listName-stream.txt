@@ -1,0 +1,60 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        try {
+            // Nhập tên, add vào listName
+            List<String> listName = new ArrayList<>();
+            String exit = "";
+            while(!exit.equalsIgnoreCase("EXIT")) {
+                System.out.println("Nhập tên: ");
+                String name = sc.nextLine();
+                listName.add(name);
+
+                System.out.println("Bạn có muốn nhập tiếp không?");
+                exit = sc.nextLine();
+            }
+
+            // Đếm số lượng name
+            Long countName = listName.stream().count();
+            System.out.println(countName);
+
+            List<Student> listStudent = listName.stream()
+                                                .map(name -> {
+                                                    Student std = new Student();
+                                                    std.setName(name);
+                                                    std.setAge(18);
+                                                    return std;
+                                                }).toList();
+
+            for (Student std : listStudent) {
+                if (std.getName().startsWith("A")) {
+                    System.out.println(std.getName());
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Lỗi: " + e.getMessage());
+        } finally {
+            System.out.println("Kết thúc");
+        }
+        sc.close();
+    }
+}
+
+
+=========
+public class Student {
+    public String name;
+    public Integer age;
+    // Getter setter
+}
+
+
+
+
+

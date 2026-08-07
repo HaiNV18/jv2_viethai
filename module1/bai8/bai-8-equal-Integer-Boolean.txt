@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        Integer num1 = new Integer(1);
+        Integer num2 = new Integer(1);
+        int num3 = 1;
+
+//        System.out.println(num1 == num2);
+//        System.out.println(num1 == num3);
+//        System.out.println(num1.equals(num2));
+//        System.out.println(num1.equals(num3));
+
+        Boolean b1 = true;
+        Boolean b2 = true;
+        boolean b3 = true;
+
+        System.out.println(b1 == b2);
+        System.out.println(b1 == b3);
+        System.out.println(b1.equals(b2));
+        System.out.println(b1.equals(b3));
+
+        sc.close();
+    }
+
+}

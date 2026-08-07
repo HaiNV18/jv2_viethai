@@ -1,0 +1,12 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        List<String> listName = Arrays.asList("An", "Bình", "Lan", "Anh", "Long", "Linh");
+        Set<String> setName = new HashSet<>(listName);
+        List<String> result = setName.stream()
+                                    .filter(name -> name.length() > 3)
+                                    .toList();
+        System.out.println("result: " + result);
+    }
+}

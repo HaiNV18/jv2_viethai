@@ -1,0 +1,33 @@
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        try {
+            System.out.println("Nhập số người:");
+            int soNguoi = sc.nextInt();
+            System.out.println("Nhập số tiền hóa đơn:");
+            double tongTien = sc.nextDouble();
+            chiaTien(tongTien, soNguoi);
+
+        } catch (InputMismatchException e) {
+            System.out.println("Sai kiểu dữ liệu");
+        } catch (ArithmeticException e) {
+            System.out.println("Số người lớn hơn 0");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Tiền và số người không được âm");
+        }
+        sc.close();
+    }
+
+    public static void chiaTien(double tongTien, int soNguoi) throws IllegalArgumentException {
+        if (tongTien < 0 || soNguoi < 0) {
+            throw new IllegalArgumentException();
+        }
+        double pricePerPerson = tongTien / soNguoi;
+        System.out.println(pricePerPerson);
+    }
+
+}

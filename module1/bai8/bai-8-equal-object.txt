@@ -1,0 +1,18 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        Student std1 = new Student("An", 18);
+        Student std2 = new Student("An", 18);
+        Student std3 = new Student("Bình", 19);
+
+        System.out.println(std1 == std2); // khác địa chỉ
+        System.out.println(std1 == std3); // khác địa chỉ
+        System.out.println(std1.equals(std2)); // equals() này là của Object -> cách so sánh giống ==
+        System.out.println(std1.equals(std3)); // equals() này là của Object -> cách so sánh giống ==
+
+        sc.close();
+    }
+}

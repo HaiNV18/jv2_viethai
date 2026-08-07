@@ -1,0 +1,20 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+
+        List<Student> students = Arrays.asList(
+                new Student("An", 20, 7.5),
+                new Student("Lan", 21, 8.8),
+                new Student("Long", 22, 6.2),
+                new Student("Hoa", 20, 9.1),
+                new Student("Nam", 21, 5.9)
+        );
+
+        List<Student> result = students.stream()
+                                    .sorted(Comparator.comparing(Student::getScore).reversed())
+                                    .toList();
+
+        System.out.println("Sinh vien co diem cao nhat la: " + result.get(0).getScore());
+    }
+}

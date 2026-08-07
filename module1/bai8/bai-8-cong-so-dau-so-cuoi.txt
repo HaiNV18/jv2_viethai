@@ -1,0 +1,25 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+
+        List<Double> listDouble = Arrays.asList(9.7, 11.5, 13.3, 5.7, 14.7, 8.8, 9.5);
+        int length = listDouble.size();
+        List<Double> listSum = new ArrayList<>();
+
+        for (int i=0; i < length; i++) {
+            double left = listDouble.get(i);
+            double right = listDouble.get(length - 1 - i);
+
+            if (left != right) {
+                listSum.add(left + right);
+            } else {
+                listSum.add(listDouble.get(i));
+            }
+        }
+        System.out.println("listSum: " + listSum);
+
+        Set<Double> result = new TreeSet<>(listSum);
+        System.out.println("result: " + result);
+    }
+}

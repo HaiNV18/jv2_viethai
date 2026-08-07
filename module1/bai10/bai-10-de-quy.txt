@@ -1,0 +1,52 @@
+public class Main {
+    public static void main(String[] args) {
+        // Cách đệ quy
+        // n + (n-1) + (n-2) + ... + 2 + 1
+        System.out.println(sum(5));
+
+        // Cách bình thường
+        // 1 + 2 + ... + n
+        int sum = 0;
+        for (int i=1; i<=5; i++) {
+            sum += i;
+            System.out.println(sum);
+        }
+
+        printNumber(5);
+
+        hanoi(5, "coc A", "coc B", "coc C");
+    }
+
+    public static void hanoi(int n, String nguon, String trunggian, String dich) {
+        // điều kiện dừng
+        if (n == 1) {
+            System.out.println("Di chuyển đĩa 1 từ " + nguon + " sang " + dich);
+            return;
+        }
+
+        // Bước 1: Chuyển n-1 đĩa sang cọc trung gian
+        hanoi(n-1, nguon, dich, trunggian);
+
+        // Bước 2: Chuyển đĩa lớn nhất sang dich
+        System.out.println("Di chuyển đĩa " + n + " từ " + nguon + " sang " + dich);
+
+        // Bước 3: Chuyển n-1 đĩa sang cọc đích
+        hanoi(n - 1, trunggian, nguon, dich);
+    }
+    
+    public static void printNumber(int n) {
+        if (n == 0) {
+            return;
+        }
+        System.out.print(n + ", ");
+        printNumber(n - 1);
+    }
+
+    public static int sum(int n) {
+        // điều kiện dừng
+        if (n == 1) {
+            return 1;
+        }
+        return n + sum(n - 1); // gọi lại chính hàm sum()
+    }
+}

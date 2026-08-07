@@ -1,0 +1,46 @@
+public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        try {
+            System.out.println("Nhập điểm: ");
+            double diem = sc.nextDouble();
+            nhapDiem(diem);
+
+        } catch (DiemKhongHopLeException e) {
+            System.out.println("Lỗi: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Lỗi không xác định: " + e.getMessage());
+        } finally {
+            System.out.println("Kết thúc");
+        }
+        sc.close();
+    }
+
+    public static void nhapDiem(double diem) throws DiemKhongHopLeException {
+        if (diem < 0 || diem > 10) {
+            throw new DiemKhongHopLeException("Điểm không hợp lệ! Điểm phải nằm trong khoảng từ 0 đến 10.");
+        }
+        System.out.println("Điểm hợp lệ: " + diem);
+    }
+
+
+
+
+
+==============
+public class DiemKhongHopLeException extends Exception {
+
+    public DiemKhongHopLeException(String message) {
+        super("My exception: " + message);
+    }
+
+    public DiemKhongHopLeException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public DiemKhongHopLeException(Throwable cause) {
+        super(cause);
+    }
+}
+
+
